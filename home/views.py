@@ -5,6 +5,9 @@ from django.http import HttpResponse , HttpResponseRedirect
 from django.shortcuts import render
 
 def post_home(request):
-	return HttpResponse("<h1>Hello guys</h1>")
+	context = {
+	"title":"Zomato"
+	}
+	return render(request,"index.html",context)
 
 # Create your views here.
