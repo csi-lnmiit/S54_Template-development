@@ -91,12 +91,12 @@
 .slideshow-container {
   max-width: 1000px;
   position: center;
-  margin: 25px;
+  margin-left: : 25px;
   padding:50px;
 }
 
 /* Next & previous buttons */
-.prev, .next {
+.prev,.next {
   cursor: pointer;
   top: 50%;
   width: auto;
