@@ -1,3 +1,18 @@
+#example1 {
+    box-sizing: content-box;    
+    width: 600px;
+    height: 300px;
+    /*padding-left: 50px;*/
+    padding-top:  50px; 
+    margin-left: 360px;
+    position:center;   
+    /*object-position: center;*/
+}
+
+.slideshow-images{
+  max-height:"42"; width:"42";
+}
+
 .lefty{
   float:left;
   /*left-margin:-40px;*/
@@ -92,7 +107,7 @@
   max-width: 1000px;
   position: center;
   margin-left: : 25px;
-  padding:50px;
+  /*padding:50px;*/
 }
 
 /* Next & previous buttons */
