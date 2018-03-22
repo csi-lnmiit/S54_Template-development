@@ -17,4 +17,4 @@ def post_home(request):
     	context={
     	"title":"zomato",
     	}
-        return render(request,'index.html',context)
+        return render(request,'base.html',context)
