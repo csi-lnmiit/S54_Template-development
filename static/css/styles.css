@@ -1,3 +1,18 @@
+#example1 {
+    box-sizing: content-box;    
+    width: 600px;
+    height: 300px;
+    /*padding-left: 50px;*/
+    padding-top:  50px; 
+    margin-left: 360px;
+    position:center;   
+    /*object-position: center;*/
+}
+
+.slideshow-images{
+  max-height:"42"; width:"42";
+}
+
 .lefty{
   float:left;
   /*left-margin:-40px;*/
@@ -50,6 +65,10 @@
   font-size: 17px;
 }
 
+li::before{
+  content: none;
+}
+
 @media screen and (max-width: 600px) {
   .topnav a, .topnav input[type=text] {
     float: none;
@@ -78,26 +97,31 @@
   width: 100%;
   height: 100%;
   z-index:99;
-  background-image: url("https://www.activeknowsley.com/images/gym2.jpg");
-  background-size: cover;
-  opacity: 0.4;
 }
 
-* {box-sizing: border-box}
-body {font-family: Verdana, sans-serif; margin:0}
-.mySlides {display: none}
-img {vertical-align: middle;}
+.content{
+  background-image: url("https://www.activeknowsley.com/images/gym2.jpg");
+  background-size: cover;
+}
 
-.slideshow-container::before {
+.bg-container{
+  height: 100%
+}
+ 
+.mySlides {display: none; position:relative;
+ margin-left: 23px}
+
+
+.slideshow-container {
   max-width: 1000px;
-  position: relative;
-  margin: auto;
+  position: center;
+  margin-left: : 25px;
+  /*padding:50px;*/
 }
 
 /* Next & previous buttons */
-.prev, .next {
+.prev,.next {
   cursor: pointer;
-  position: absolute;
   top: 50%;
   width: auto;
   padding: 16px;
