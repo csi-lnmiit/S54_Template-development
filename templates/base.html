@@ -100,61 +100,6 @@
     </header>
 
     <!-- Page Content -->
-<<<<<<< HEAD
-    <!-- <div class= "container">
-          <div class='col-sm-8 col-sm-offset-2'>
-    
-                {% for obj in object_list %}
-              
-                 <div class="row">
-                 <div class="col-sm-12">
-                  <div class="thumbnail">
-                  {% if obj.image %}
-                  <img src= '{{ obj.image.url}}' class='img-responsive'/>
-                  {% endif %}
-                  
-                    <div class="caption">
-                      <h3><a href ='{{ obj.get_absolute_url }}'>{{ obj.title }}</a><small>{{ obj.timestamp|timesince }}</small></h3>
-                      <p>{{ obj.content | linebreaks|truncatechars:120 }}</p>
-                      <p><a href='{{ obj.get_absolute_url }}' class="btn btn-primary" role="button">View</a> </p>
-                    </div>
-                  </div>
-                </div>
-
-              <hr/>
-              </div>
-
-                {% endfor %}
-
-              <div class="pagination">
-                  <span class="step-links">
-                      {% if object_list.has_previous %}
-                          <a href="?{{page_request_var}}={{ object_list.previous_page_number }}">previous</a>
-                      {% endif %}
-
-                      <span class="current">
-                          Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
-                      </span>
-
-                      {% if object_list.has_next %}
-                          
-                          <a href="?{{page_request_var}}={{ object_list.paginator.num_pages }}">last &raquo;</a>
-                      {% endif %}
-                  </span>
-              </div>
-
-
-          </div>
-    </div> -->
-    <section class="py-5">
-      <div class="container">
-        <h1>Full Slider by Start Bootstrap</h1>
-        <p>The background images for the slider are set directly in the HTML using inline CSS. The rest of the styles for this template are contained within the
-          <code>full-slider.css</code>
-          file.</p>
-      </div>
-    </section>
-=======
     <!-- The main container -->
     <div class = "row">
       <!-- left side bar -->
@@ -183,8 +128,6 @@
       <div class = "col-md-3 container">
       </div>
     </div> <!-- Ending of main container -->
-
->>>>>>> 0f3878003a3b536aae97979ce4ef7717de362642
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">
