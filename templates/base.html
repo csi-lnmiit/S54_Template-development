@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>GYMS ONLY</title>
+    <title>{{title}}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet">
@@ -100,6 +100,7 @@
     </header>
 
     <!-- Page Content -->
+<<<<<<< HEAD
     <!-- <div class= "container">
           <div class='col-sm-8 col-sm-offset-2'>
     
@@ -153,6 +154,37 @@
           file.</p>
       </div>
     </section>
+=======
+    <!-- The main container -->
+    <div class = "row">
+      <!-- left side bar -->
+      <div class = "col-md-2 container">
+      </div>
+      <!-- Main content -->
+      <div class = "col-md-7">
+        <section class="py-5">
+          <div class="container">
+            <h1>List of Gyms</h1>
+            {% for obj in object_list %}
+            <div class="card">
+              <img class="card-img-top" src="..." alt="{{obj.title}}">
+              <div class="card-body">
+                <a href="#"><h5 class="card-title">{{obj.title}}</h5></a>
+                <p class="card-text">{{obj.text}}</p>
+              </div>
+            </div>
+            <br/>
+            <br/>
+            {% endfor %}
+          </div>
+        </section>
+      </div>
+      <!-- Right side Bar -->
+      <div class = "col-md-3 container">
+      </div>
+    </div> <!-- Ending of main container -->
+
+>>>>>>> 0f3878003a3b536aae97979ce4ef7717de362642
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">

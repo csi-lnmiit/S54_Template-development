@@ -6,6 +6,7 @@ from django.shortcuts import render,redirect
 from .models import Post
 
 def post_home(request):
+    queryset = Post.objects.all()
     if(request.method == 'POST'):
         tit= request.POST['search']
         text="dhcvhsv"
@@ -15,8 +16,10 @@ def post_home(request):
         return redirect('/home')
     else:
     	context={
-    	"title":"zomato",
+        "object_list" : queryset,
+    	"title":"GYMS",
     	}
+<<<<<<< HEAD
         return render(request,'base.html',context)
 # def post_list(request):
 #     # if request.user.is_authenticated():
@@ -45,3 +48,6 @@ def post_home(request):
 #             }
 #     #return render(request,"base.html",context)
 #     return render(request,"post_list.html",context)
+=======
+        return render(request,'base.html',context)
+>>>>>>> 0f3878003a3b536aae97979ce4ef7717de362642

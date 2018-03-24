@@ -70,8 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'TemplateDev.wsgi.application'
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
@@ -80,20 +79,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': os.path.join(BASE_DIR, 'mysql'),
-#         #'NAME': 'temp',
-#         'USER':'root',
-#         'PASSWORD':'16ucs142',
-#         'HOST':'',
-#         'PORT':''
-#     }
-# }
-
-# Password validation
-# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -135,3 +120,11 @@ STATICFILES_DIRS =[
 ]
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static")
+
+# MEDIA_URL = '/media'
+
+
+# LOGIN_URL = 'login'
+# LOGOUT_URL = 'logout'
+# LOGIN_REDIRECT_URL = 'home'
+# LOGOUT_REDIRECT_URL = 'home'
