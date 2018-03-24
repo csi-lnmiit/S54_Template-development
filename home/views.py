@@ -20,3 +20,9 @@ def post_home(request):
     	"title":"GYMS",
     	}
         return render(request,'base.html',context)
+
+def post_detail(request):
+    instance = Post.objects.get()
+    context = {
+        "title = "
+    }
