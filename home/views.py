@@ -19,8 +19,6 @@ def post_home(request):
         "object_list" : queryset,
     	"title":"GYMS",
     	}
-<<<<<<< HEAD
-<<<<<<< HEAD
         return render(request,'base.html',context)
 # def post_list(request):
 #     # if request.user.is_authenticated():
@@ -49,15 +47,11 @@ def post_home(request):
 #             }
 #     #return render(request,"base.html",context)
 #     return render(request,"post_list.html",context)
-=======
-        return render(request,'base.html',context)
->>>>>>> 0f3878003a3b536aae97979ce4ef7717de362642
-=======
-        return render(request,'base.html',context)
+ #       return render(request,'base.html',context)
+  #      return render(request,'base.html',context)
 
 def post_detail(request):
     instance = Post.objects.get()
     context = {
         "title = "
     }
->>>>>>> 7d8786ac5b119c25dc81f6dbb424586bf5e275aa
