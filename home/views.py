@@ -6,6 +6,7 @@ from django.shortcuts import render,redirect
 from .models import Post
 
 def post_home(request):
+    queryset = Post.objects.all()
     if(request.method == 'POST'):
         tit= request.POST['search']
         text="dhcvhsv"
@@ -15,6 +16,7 @@ def post_home(request):
         return redirect('/home')
     else:
     	context={
-    	"title":"zomato",
+        "object_list" : queryset,
+    	"title":"GYMS",
     	}
         return render(request,'base.html',context)

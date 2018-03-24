@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>GYMS ONLY</title>
+    <title>{{title}}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet">
@@ -99,14 +99,35 @@
     </header>
 
     <!-- Page Content -->
-    <!-- <section class="py-5">
-      <div class="container">
-        <h1>Full Slider by Start Bootstrap</h1>
-        <p>The background images for the slider are set directly in the HTML using inline CSS. The rest of the styles for this template are contained within the
-          <code>full-slider.css</code>
-          file.</p>
+    <!-- The main container -->
+    <div class = "row">
+      <!-- left side bar -->
+      <div class = "col-md-2 container">
       </div>
-    </section> -->
+      <!-- Main content -->
+      <div class = "col-md-7">
+        <section class="py-5">
+          <div class="container">
+            <h1>List of Gyms</h1>
+            {% for obj in object_list %}
+            <div class="card">
+              <img class="card-img-top" src="..." alt="{{obj.title}}">
+              <div class="card-body">
+                <a href="#"><h5 class="card-title">{{obj.title}}</h5></a>
+                <p class="card-text">{{obj.text}}</p>
+              </div>
+            </div>
+            <br/>
+            <br/>
+            {% endfor %}
+          </div>
+        </section>
+      </div>
+      <!-- Right side Bar -->
+      <div class = "col-md-3 container">
+      </div>
+    </div> <!-- Ending of main container -->
+
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">
