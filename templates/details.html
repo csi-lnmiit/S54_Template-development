@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+	<div class="card" style="width: 18rem;">
+		<img class="card-img-top" src='{{ obj_photos[0].image.url}}' alt="Card image cap">
+		<div class="card-body">
+			<h5 class="card-title">{{object.title}}</h5>
+			<p class="card-text">{{obj_add.locality}}</p>
+			<p class="card-text">{{obj_add.city}}</p>
+			<a href="#" class="btn btn-primary">Go somewhere</a>
+		</div>
+	</div>
+</div>
+<div class=row>
+	<div class="col-md-4">
+		<div class="row">
+			<h1>Contact number</h1>
+			nos=object.contact.split(";")
+			{% for a in nos %}
+			{{ a }}
+			{% endfor}
+		</div>
+		<div class="row">
+			<h1>"Gym Packages"</h1>                                             
+		<div class="row">
+			<h1>Any field</h1>
+			<!-- pac=object.packages.split(";")
+			{% for p in pac %}
+			{{ p }}
+			{% endfor} -->
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+			<h1>Equipments present</h1>
+			{% for eq in obj_equip %}
+				<h2>{{eq.name}}</h2>
+				<h3>Specs</h3>
+				{{eq.specs}}
+				<h4>Purpose</h4>
+				{{eq.purpose}}
+			{{% endfor %}}
+		</div>
+		<div class="row">
+			<h5>Address</h5>
+			ad=obj_add.split(";")
+			{{% for b in ad%}}
+				{{b}}
+			{{% endfor%}}
+		</div>
+	</div>
+	<div class ="col-md-4">
+		<div class="row">
+			<h7>Opening hours</h7>
+			<p>{{object_timing}}</p>
+		</div>
+		<div class ="row">
+			<h9>Any field 2</h9>
+		</div>
+		<div class ="row">
+			<h9>Any field 3</h9>
+		</div>
+	</div>
+</div>
+
+{% endblock content%}
