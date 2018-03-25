@@ -3,6 +3,6 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^$' ,"home.views.post_home"),
-    url(r'^detail/$' ,"home.views.post_detail"),
+    url(r'^$' ,views.post_home,name = "post_home"),
+    url(r'^detail/$' ,views.post_detail, name = "post_detail"),
 ]

@@ -3,10 +3,10 @@ from __future__ import unicode_literals
 from django.http import HttpResponse , HttpResponseRedirect
 
 from django.shortcuts import render,redirect
-from .models import Post
+from .models import Gym
 
 def post_home(request):
-    queryset = Post.objects.all()
+    queryset = Gym.objects.all()
     if(request.method == 'POST'):
         tit= request.POST['search']
         text="dhcvhsv"
@@ -22,7 +22,7 @@ def post_home(request):
         return render(request,'base.html',context)
 
 def post_detail(request):
-    instance = Post.objects.get()
+    instance = Gym.objects.get()
     context = {
         "title = "
     }
