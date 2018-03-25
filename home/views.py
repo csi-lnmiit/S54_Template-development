@@ -5,7 +5,7 @@ from django.http import HttpResponse , HttpResponseRedirect
 from django.shortcuts import render,redirect
 from .models import Gym
 
-def post_home(request):
+def main(request):
     queryset = Gym.objects.all()
     if(request.method == 'POST'):
         tit= request.POST['search']
@@ -19,10 +19,17 @@ def post_home(request):
         "object_list" : queryset,
     	"title":"GYMS",
     	}
-        return render(request,'base.html',context)
+        return render(request,'index.html',context)
 
-def post_detail(request):
+def detail(request):
     instance = Gym.objects.get()
     context = {
         "title = "
     }
+
+
+
+def html_test(request):
+    return render(request,'base.html')
+
+
