@@ -4,13 +4,13 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-def upload_location(instance,filename):
-	return "%s/%s" %(instance.id,filename)
+# def upload_location(instance,filename):
+# 	return "%s/%s" %(instance.id,filename)
 
 # Create your models here.
 class Gym(models.Model):
 	title=models.CharField(max_length=120,null=False)
-	cover_image=models.ImageField(null=True,blank=True)
+	cover_image=models.ImageField(default="...",blank=True)
 	content_short=models.TextField(null=True)
 	timing = models.CharField(max_length=120,null=True)
 	charges = models.CharField(max_length=150,null=True)
@@ -73,3 +73,5 @@ class Photos(models.Model):
 	timestamp=models.DateTimeField(auto_now=False,auto_now_add=True)
 
 
+# http://127.0.0.1:8000/media/car.jpg
+# http://127.0.0.1:8000/media/23/car_Rhzw6Lu.jpg
