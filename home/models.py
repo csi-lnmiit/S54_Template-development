@@ -60,9 +60,9 @@ class Content_Long(models.Model):
 	updated=models.DateTimeField(auto_now=True,auto_now_add=False)
 	timestamp=models.DateTimeField(auto_now=False,auto_now_add=True)
 	def __unicode__(self):
-		return self.gym_id
+		return self.detail1
 	def __str__(self):
-		return self.gym_id
+		return self.detail1
 
 
 class Photos(models.Model):
@@ -71,9 +71,5 @@ class Photos(models.Model):
 	name = models.CharField(max_length=20,null=True)
 	updated=models.DateTimeField(auto_now=True,auto_now_add=False)
 	timestamp=models.DateTimeField(auto_now=False,auto_now_add=True)
-	def __unicode__(self):
-		return self.name
-	def __str__(self):
-		return self.name
-	
+
 

@@ -21,15 +21,24 @@ def main(request):
     	}
         return render(request,'index.html',context)
 
-def detail(request):
-    instance = Gym.objects.get()
+def detail(request,id=18):
+    instance = Gym.objects.get(id)
+    inst_add = Address.objects.filter(gym_id=id)
+    inst_eq = Equipment.objects.filter(gym_id=id)
+    inst_cont = Content_Long.objects.filter(gym_id=id)
+    inst_pho = Photos.objects.filter(gym_id=id)
     context = {
-        "title = "
+        "title" : instance.title,
+        "object" : instance,
+        "obj_add" : inst_add,
+        "obj_content" : inst_cont,
+        "obj_equip" : inst_eq,
+        "obj_photos" : inst_pho,
     }
-
+    return render(request,'details.html',context)
 
 
 def html_test(request):
-    return render(request,'base.html')
+    return render(request,'details.html')
 
 
