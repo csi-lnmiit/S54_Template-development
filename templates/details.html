@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="card" style="width: 18rem;">
-		<img class="card-img-top" src='{{ obj_photos[0].image.url}}' alt="Card image cap">
+		<img class="card-img-top" src='{{ obj_photos.image.url}}' alt="Card image cap">
 		<div class="card-body">
 			<h5 class="card-title">{{object.title}}</h5>
 			<p class="card-text">{{obj_add.locality}}</p>
@@ -18,17 +18,18 @@
 			<h1>Contact number</h1>
 			nos=object.contact.split(";")
 			{% for a in nos %}
-			{{ a }}
-			{% endfor}
+				{{ a }}
+			{% endfor %}
 		</div>
 		<div class="row">
-			<h1>"Gym Packages"</h1>                                             
+			<h1>"Gym Packages"</h1>
+			pac=object.packages.split(";")
+			{% for p in pac %}
+				{{ p }}
+			{% endfor %}
+
 		<div class="row">
 			<h1>Any field</h1>
-			<!-- pac=object.packages.split(";")
-			{% for p in pac %}
-			{{ p }}
-			{% endfor} -->
 		</div>
 	</div>
 	<div class="col-md-4">
@@ -40,14 +41,14 @@
 				{{eq.specs}}
 				<h4>Purpose</h4>
 				{{eq.purpose}}
-			{{% endfor %}}
+			{% endfor %}
 		</div>
 		<div class="row">
 			<h5>Address</h5>
 			ad=obj_add.split(";")
-			{{% for b in ad%}}
+			{% for b in ad %}
 				{{b}}
-			{{% endfor%}}
+			{% endfor %}
 		</div>
 	</div>
 	<div class ="col-md-4">
@@ -64,4 +65,5 @@
 	</div>
 </div>
 
-{% endblock content%}
+
+{% endblock content %}

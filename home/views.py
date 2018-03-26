@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.http import HttpResponse , HttpResponseRedirect
 
 from django.shortcuts import render,redirect
-from .models import Gym
+from .models import *
 
 def main(request):
     queryset = Gym.objects.all()
@@ -21,12 +21,21 @@ def main(request):
     	}
         return render(request,'index.html',context)
 
-def detail(request):
-    instance = Gym.objects.get()
+def detail(request,id=id):
+    instance = Gym.objects.get(id=id)
+    inst_add = Address.objects.filter(gym_id=id)
+    inst_eq = Equipment.objects.filter(gym_id=id)
+    inst_cont = Content_Long.objects.filter(gym_id=id)
+    inst_pho = Photos.objects.filter(gym_id=id)
     context = {
-        "title = "
+        "title" : instance.title,
+        "object" : instance,
+        "obj_add" : inst_add,
+        "obj_content" : inst_cont,
+        "obj_equip" : inst_eq,
+        "obj_photos" : inst_pho,
     }
-
+    return render(request,'details.html',context)
 
 
 def html_test(request):

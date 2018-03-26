@@ -63,10 +63,11 @@
             <h1>List of Gyms</h1>
             {% for obj in object_list %}
             <div class="card">
-              <img class="card-img-top" src="..." alt="{{obj.title}}">
+              <img class="card-img-top" src="{{obj.cover_image.url}}" alt="{{obj.title}}">
               <div class="card-body">
-                <a href="#"><h5 class="card-title">{{obj.title}}</h5></a>
+                <a href='/home/{{obj.id}}/'><h5 class="card-title">{{obj.title}}</h5></a>
                 <p class="card-text">{{obj.content_short}}</p>
+                <p><a href='/{{obj.id}}/' class="btn btn-primary" role="button">View</a> 
               </div>
             </div>
             <br/>
