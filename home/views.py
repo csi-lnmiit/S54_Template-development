@@ -23,7 +23,8 @@ def main(request):
 
 def detail(request,id=id):
     instance = Gym.objects.get(id=id)
-    inst_add = Address.objects.filter(gym_id=id)
+    inst_add = (Address.objects.get(gym_id=id))
+    com_add = inst_add.complete_add.split(";")
     inst_eq = Equipment.objects.filter(gym_id=id)
     inst_cont = Content_Long.objects.filter(gym_id=id)
     inst_pho = Photos.objects.filter(gym_id=id)
@@ -34,7 +35,11 @@ def detail(request,id=id):
         "obj_content" : inst_cont,
         "obj_equip" : inst_eq,
         "obj_photos" : inst_pho,
+        "com_add" : com_add,
+
     }
+    print context
+    #print obj_equip
     return render(request,'details.html',context)
 
 

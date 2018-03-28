@@ -1,67 +1,91 @@
 {% extends "base.html" %}
 {% block content %}
-
-<div class="container" style="padding-left: 40px">
-<div class="row" style="padding-top:20px; padding-left: 100px">
+<style>
+.d{
+	display:block;
+}
+.c{
+		
+}
+.pad{
+	padding-top: 35px
+}
+</style>
+<div class="container" style="padding-left: 100px">
+<div class="row" style="padding-top:20px">
 	<div class="card" style="width: 70rem">
 		<img class="card-img-top" src='{{ object.cover_image.url}}' alt="Card image cap">
 		<div class="card-body">
 			<h5 class="card-title">{{object.title}}</h5>
 			<p class="card-text">{{obj_add.locality}}</p>
-			<p class="card-text">{{obj_add.city}}</p>
+			<p class="card-text">{{obj_equip.name}}</p>
 			<a href="#" class="btn btn-primary">Go somewhere</a>
 		</div>
 	</div>
 </div>
-<div class="row">
+<div class="row" style="padding-top: 26px">
 	<div class="col-md-4">
 		<div class="row">
-			<h3>Contact number</h3>
+			<h3 class="c">Contact number</h3>
 			nos=object.contact.split(";")
 			{% for a in nos %}
 				{{ a }}
 			{% endfor %}
 		</div>
-		<div class="row">
-			<h3>"Gym Packages"</h3>
+		<div class="row pad" >
+			<h3 class="c">"Gym Packages"</h3>
 			pac=object.packages.split(";")
 			{% for p in pac %}
 				{{ p }}
 			{% endfor %}
 		</div>
-		<div class="row">
-			<h3>Any field</h3>
+		<div class="row pad">
+			<h3 class="c">Any field</h3>
 		</div>
 	</div>
 	<div class="col-md-4">
-		<div class="row">
-			<h3>Equipments present</h3>
+		<div class="row d">
+			<h3 class="c">Equipments present</h3>
 			{% for eq in obj_equip %}
-				<h3>{{eq.name}}</h3>
-				<h3>Specs</h3>
-				{{eq.specs}}
-				<h4>Purpose</h4>
-				{{eq.purpose}}
+				<h4 style="color: red">{{eq.name}}</h4>
+				<div class="row">
+					<div class="col-md-4">
+						<div style="color: green">Specification</div>
+					</div>
+					<div class="col-md-8">
+						{{eq.specs}}
+						
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<div style="color: blue">Purpose</div>
+					</div>
+					<div class="col-md-8">
+						{{eq.purpose}}
+					</div>
+				</div>
 			{% endfor %}
 		</div>
-		<div class="row">
-			<h3>Address</h3>
-			ad=obj_add.split(";")
-			{% for b in ad %}
-				{{b}}
+		<div class="row d pad" >
+			<h3 class="c">Address</h3>
+			
+			{% for b in com_add %}
+				{{b}}<br/>
 			{% endfor %}
 		</div>
 	</div>
 	<div class ="col-md-4">
-		<div class="row">
+		<div class="row ">
 			<h3>Opening hours</h3>
 			<p>{{object_timing}}</p>
 		</div>
-		<div class ="row">
-			<h3>Any field 2</h3>
+		<div class ="row pad">
+			<h3 class="c">Any field 2</h3>
 		</div>
-		<div class ="row">
-			<h3>Any field 3</h3>
+		<div class ="row pad">
+			<h3 class="c">Any field 3</h3>
 		</div>
 	</div>
 </div>
