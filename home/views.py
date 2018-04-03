@@ -30,6 +30,7 @@ def detail(request,id=id):
     inst_pho = Photos.objects.filter(gym_id=id)
     nos=instance.contact.split(";")
     pac=instance.charges.split(";")
+    timing = instance.timing.split(";"),
     context = {
         "title" : instance.title,
         "object" : instance,
@@ -40,6 +41,7 @@ def detail(request,id=id):
         "com_add" : com_add,
         "nos" : nos,
         "pac" : pac,
+        "timing" : timing
     }
     print context
     #print obj_equip
