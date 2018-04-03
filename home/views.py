@@ -28,6 +28,8 @@ def detail(request,id=id):
     inst_eq = Equipment.objects.filter(gym_id=id)
     inst_cont = Content_Long.objects.filter(gym_id=id)
     inst_pho = Photos.objects.filter(gym_id=id)
+    nos=instance.contact.split(";")
+    pac=instance.charges.split(";")
     context = {
         "title" : instance.title,
         "object" : instance,
@@ -36,7 +38,8 @@ def detail(request,id=id):
         "obj_equip" : inst_eq,
         "obj_photos" : inst_pho,
         "com_add" : com_add,
-
+        "nos" : nos,
+        "pac" : pac,
     }
     print context
     #print obj_equip
