@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 <style>
+.det_imgheight{
+height: 50vh;
+}
 .d{
 	display:block;
 }
@@ -18,85 +21,88 @@
 }
 </style>
 <div class="container" style="padding-left: 100px">
-<div  style="padding-top:20px">
-	<div class="card h-50" style="width: 70rem height:50vh">
-		<img class="card-img-top" src='{{ object.cover_image.url}}' alt="Card image cap">
-		<div class="card-body">
-			<h5 class="card-title">{{object.title}}</h5>
-			<p class="card-text">{{obj_add.locality}}</p>
-			<p class="card-text">{{obj_equip.name}}</p>
-			<a href="#" class="btn btn-primary">Go somewhere</a>
+	<div  style="padding-top:20px" >
+		<div class="card" style="height:75vh" >
+			<img class="card-img-top det_imgheight" src='{{ object.cover_image.url}}' alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">{{object.title}}</h5>
+				<p class="card-text">{{obj_add.locality}}</p>
+				<p class="card-text">{{obj_equip.name}}</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
 		</div>
 	</div>
-</div>
-<div class="row" style="padding-top: 26px">
-	<div class="col-md-4">
-		<div class="row d ">
-			<h3 class="c ">Contact number</h3>
-			{% for a in nos %}
-				<div class="detail_split">+91-{{ a }}<br/></div>
-			{% endfor %}
-		</div>
-		<div class="row pad d" >
-			<h3 class="c">Gym Packages</h3>
-			<ul>
-			{% for p in pac %}
-				<li><div class="detail_split">{{ p }}<br/></div></li>
-			{% endfor %}</ul>
-		</div>
-		<div class="row pad">
-			<h3 class="c">Any field</h3>
-		</div>
-	</div>
-	<div class="col-md-4">
-		<div class="row d">
-			<h3 class="c">Equipments present</h3>
-			<div class="detail_notsplit">{% for eq in obj_equip %}
-				<h4 style="color: red">{{eq.name}}</h4>
-				<div class="row detail_notsplit">
-					<div class="col-md-4">
-						<div style="color: green">Specification</div>
+	<div class="pad">
+		<div class="card">
+			<div class="row card-body" style="padding-top: 26px">
+				<div class="col-md-4">
+					<div class="row d ">
+						<h3>Contact number</h3>
+						{% for a in nos %}
+							<div class="detail_split">+91-{{ a }}<br/></div>
+						{% endfor %}
 					</div>
-					<div class="col-md-8">
-						{{eq.specs}}
+					<div class="row pad d" >
+						<h3 `>Gym Packages</h3>
+						<ul>
+						{% for p in pac %}
+							<li><div class="detail_split">{{ p }}<br/></div></li>
+						{% endfor %}</ul>
+					</div>
+					<div class="row pad">
+						<h3>Any field</h3>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="row d">
+						<h3>Equipments present</h3>
+						<div class="detail_notsplit">{% for eq in obj_equip %}
+							<h4 style="color: red">{{eq.name}}</h4>
+							<div class="row detail_notsplit">
+								<div class="col-md-4">
+									<div style="color: green">Specs : </div>
+								</div>
+								<div class="col-md-8">
+									{{eq.specs}}
+									
+								</div>
+							</div>
+
+							<div class="row detail_notsplit ">
+								<div class="col-md-4">
+									<div style="color: blue">Purpose</div>
+								</div>
+								<div class="col-md-8" style="position: right"	>
+									{{eq.purpose}}
+								</div>
+							</div>
+						{% endfor %}</div>
+					</div>
+					<div class="row d pad" >
+						<h3 class="c">Address</h3>
 						
+						{% for b in com_add %}
+							<div class="detail_notsplit">{{ b }}<br/></div>
+						{% endfor %}
 					</div>
 				</div>
-
-				<div class="row detail_notsplit ">
-					<div class="col-md-4">
-						<div style="color: blue">Purpose</div>
+				<div class ="col-md-4">
+					<div class="row d">
+						<h3>Opening hours</h3>
+						{% for a in timing %}
+							<div class="detail_split">{{ a }}<br/></div>
+						{% endfor %}
 					</div>
-					<div class="col-md-8">
-						{{eq.purpose}}
+					<div class ="row pad">
+						<h3 class="c">Any field 2</h3>
+					</div>
+					<div class ="row pad">
+						<h3 class="c">Any field 3</h3>
 					</div>
 				</div>
-			{% endfor %}</div>
-		</div>
-		<div class="row d pad" >
-			<h3 class="c">Address</h3>
-			
-			{% for b in com_add %}
-				<div class="detail_notsplit">{{ b }}<br/></div>
-			{% endfor %}
+				</div>
 		</div>
 	</div>
-	<div class ="col-md-4">
-		<div class="row d">
-			<h3>Opening hours</h3>
-			{% for a in timing %}
-				<div class="detail_split">{{ a }}<br/></div>
-			{% endfor %}
-		</div>
-		<div class ="row pad">
-			<h3 class="c">Any field 2</h3>
-		</div>
-		<div class ="row pad">
-			<h3 class="c">Any field 3</h3>
-		</div>
-	</div>
-</div>
-
 
 </div>
 {% endblock content %}

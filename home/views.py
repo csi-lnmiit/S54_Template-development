@@ -1,12 +1,21 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.http import HttpResponse , HttpResponseRedirect
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render,redirect
 from .models import *
 
 def main(request):
     queryset = Gym.objects.all()
+    paginator = Paginator(queryset, 4) # Show 25 contacts per page
+    page_request_var="page"
+    page = request.GET.get('page_request_var')
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
     if(request.method == 'POST'):
         tit= request.POST['search']
         text="dhcvhsv"
@@ -18,6 +27,7 @@ def main(request):
     	context={
         "object_list" : queryset,
     	"title":"GYMS",
+        "page_request_var": page_request_var,
     	}
         return render(request,'index.html',context)
 
