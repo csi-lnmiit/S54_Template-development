@@ -10,16 +10,10 @@
 .pad{
 	padding-top: 35px
 }
-.detail_split{
-	padding-left: 10px
-}
-.detail_notsplit{
-	padding-left: 10px
-}
 </style>
 <div class="container" style="padding-left: 100px">
 <div class="row" style="padding-top:20px">
-	<div class="card h-25" style="width: 70rem height:50vh">
+	<div class="card" style="width: 70rem">
 		<img class="card-img-top" src='{{ object.cover_image.url}}' alt="Card image cap">
 		<div class="card-body">
 			<h5 class="card-title">{{object.title}}</h5>
@@ -31,16 +25,16 @@
 </div>
 <div class="row" style="padding-top: 26px">
 	<div class="col-md-4">
-		<div class="row d ">
-			<h3 class="c ">Contact number</h3>
+		<div class="row">
+			<h3 class="c">Contact number</h3>
 			{% for a in nos %}
-				<div class="detail_split">{{ a }}<br/></div>
+				{{ a }}
 			{% endfor %}
 		</div>
-		<div class="row pad d" >
-			<h3 class="c">Gym Packages</h3>
+		<div class="row pad" >
+			<h3 class="c">"Gym Packages"</h3>
 			{% for p in pac %}
-				<div class="detail_split">{{ p }}<br/></div>
+				{{ p }}
 			{% endfor %}
 		</div>
 		<div class="row pad">
@@ -50,9 +44,9 @@
 	<div class="col-md-4">
 		<div class="row d">
 			<h3 class="c">Equipments present</h3>
-			<div class="detail_notsplit">{% for eq in obj_equip %}
+			{% for eq in obj_equip %}
 				<h4 style="color: red">{{eq.name}}</h4>
-				<div class="row detail_notsplit">
+				<div class="row">
 					<div class="col-md-4">
 						<div style="color: green">Specification</div>
 					</div>
@@ -62,7 +56,7 @@
 					</div>
 				</div>
 
-				<div class="row detail_notsplit ">
+				<div class="row">
 					<div class="col-md-4">
 						<div style="color: blue">Purpose</div>
 					</div>
@@ -70,22 +64,20 @@
 						{{eq.purpose}}
 					</div>
 				</div>
-			{% endfor %}</div>
+			{% endfor %}
 		</div>
 		<div class="row d pad" >
 			<h3 class="c">Address</h3>
 			
 			{% for b in com_add %}
-				<div class="detail_notsplit">{{ b }}<br/></div>
+				{{b}}<br/>
 			{% endfor %}
 		</div>
 	</div>
 	<div class ="col-md-4">
 		<div class="row ">
 			<h3>Opening hours</h3>
-			{% for p in timing %}
-				<div class="detail_split">{{ p }}<br/></div>
-			{% endfor %}
+			<p>{{timing}}</p>
 		</div>
 		<div class ="row pad">
 			<h3 class="c">Any field 2</h3>
