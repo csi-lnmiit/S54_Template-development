@@ -6,33 +6,48 @@ from home.models import *
 
 # Register your models here.
 
+class AddressInLine(admin.TabularInline):
+	model = Address
+
+
+class EquipmentInLine(admin.TabularInline):
+	model = Equipment
+	extra = 2
+
+
+class PhotosInLine(admin.TabularInline):
+	model = Photos
+	extra = 3
+
+class Content_LongInLine(admin.TabularInline):
+	model = Content_Long
+
+
 class GymModelAdmin(admin.ModelAdmin):
 	list_display = ["id","title","updated","timestamp"]
-	list_display_links=["updated"]
-	list_editable=["title"]
+	list_display_links=["title"]
 	list_filter=["updated","timestamp"]
 	search_fields=["title","text"]
-	class Meta:
-		model=Gym
+	inlines = [AddressInLine,EquipmentInLine,Content_LongInLine,PhotosInLine,]
+
 
 class AddressModelAdmin(admin.ModelAdmin):
-	class Meta:
-		model=Address
+	list_display = ["gym_id","locality","city"]
 
 
 class EquipmentModelAdmin(admin.ModelAdmin):
-	class Meta:
-		model=Equipment
+	list_display = ["gym_id","name"]
+	list_display_links=["name"]
+	list_filter=["purpose","specs"]
+	search_fields = ["name","purpose"]
 
 
 class Content_LongModelAdmin(admin.ModelAdmin):
-	class Meta:
-		model=Content_Long
+	list_display = ["gym_id"]
 
 
 class PhotosModelAdmin(admin.ModelAdmin):
-	class Meta:
-		model=Photos
+	list_display = ["gym_id","name"]
 
 admin.site.register(Gym,GymModelAdmin)
 admin.site.register(Address,AddressModelAdmin)
