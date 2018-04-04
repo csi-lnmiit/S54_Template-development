@@ -25,7 +25,7 @@ class Gym(models.Model):
 
 
 class Address(models.Model):
-	gym_id = models.ForeignKey('Gym',on_delete=models.CASCADE)
+	gym_id = models.OneToOneField(Gym,on_delete=models.CASCADE,primary_key=True,)
 	locality = models.CharField(max_length=40,null=True)
 	city = models.CharField(max_length=40,null=True)
 	complete_add= models.CharField(max_length=100,null=True)
@@ -53,7 +53,7 @@ class Equipment(models.Model):
 
 
 class Content_Long(models.Model):
-	gym_id = models.ForeignKey('Gym')
+	gym_id = models.OneToOneField(Gym,on_delete=models.CASCADE,primary_key=True,)
 	detail1 = models.CharField(max_length=100,null=True)
 	detail2 = models.CharField(max_length=100,null=True)
 	detail3 = models.CharField(max_length=100,null=True)
@@ -71,6 +71,11 @@ class Photos(models.Model):
 	name = models.CharField(max_length=20,null=True)
 	updated=models.DateTimeField(auto_now=True,auto_now_add=False)
 	timestamp=models.DateTimeField(auto_now=False,auto_now_add=True)
+	def __unicode__(self):
+		return self.name
+	def __str__(self):
+		return self.name
+
 
 
 # http://127.0.0.1:8000/media/car.jpg
