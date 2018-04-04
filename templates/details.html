@@ -83,7 +83,9 @@
 	<div class ="col-md-4">
 		<div class="row ">
 			<h3>Opening hours</h3>
-			<p>{{timing}}</p>
+			{% for p in timing %}
+				<div class="detail_split">{{ p }}<br/></div>
+			{% endfor %}
 		</div>
 		<div class ="row pad">
 			<h3 class="c">Any field 2</h3>
