@@ -12,7 +12,7 @@ class Gym(models.Model):
 	title=models.CharField(max_length=120,null=False)
 	cover_image=models.ImageField(default="...",blank=True)
 	content_short=models.TextField(null=True)
-	timing = models.TextField(null=False)
+	timing = models.TextField(null=True)
 	charges = models.CharField(max_length=150,null=True)
 	contact = models.CharField(max_length=100,null=True)	
 	updated=models.DateTimeField(auto_now=True,auto_now_add=False)
