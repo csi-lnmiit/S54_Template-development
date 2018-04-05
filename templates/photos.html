@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+.det_photoht{
+height: 30vh;
+}
+</style>
+
+
+<div class="card">
+	<body data-spy="scroll" data-offset="50">
+		<div class = "row">
+					{% for im in obj_photos %}
+						<div class="col-md-3">
+						
+							<div class="card">
+								<img class="card-img det_photoht" style="display: inline-block;" src='{{ im.image.url}}' alt="card image cap">
+							</div>
+						
+						</div>	
+					{% endfor %}
+		</div>
+	</body>
+</div>
+
+{% endblock content %}

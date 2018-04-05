@@ -6,6 +6,6 @@ urlpatterns = [
     url(r'^$' ,views.main,name = "main"),
     # url(r'^detail/$' ,views.detail, name = "detail"),
     url(r'^(?P<id>\d+)/$' ,views.detail, name = "detail"),
-    url(r'^html_test$' ,views.html_test, name = "html_test"),
+    url(r'^(?P<id>\d+)/photos/$' ,views.photo, name = "photo"),
     # url(r'^detail/$' ,views.detail, name = "detail"),
 	]

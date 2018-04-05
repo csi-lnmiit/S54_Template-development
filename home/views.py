@@ -6,10 +6,9 @@ from django.shortcuts import render,redirect
 from .models import *
 
 def main(request):
-    queryset = Gym.objects.all()
-    paginator = Paginator(queryset, 4) # Show 25 contacts per page
-    page_request_var="page"
-    page = request.GET.get('page_request_var')
+    queryset_list = Gym.objects.all()
+    paginator = Paginator(queryset_list, 4) # Show 25 contacts per page
+    page = request.GET.get('page')
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -27,7 +26,7 @@ def main(request):
     	context={
         "object_list" : queryset,
     	"title":"GYMS",
-        "page_request_var": page_request_var,
+        "page": page,
     	}
         return render(request,'index.html',context)
 
@@ -41,6 +40,7 @@ def detail(request,id=id):
     nos=instance.contact.split(";")
     pac=instance.charges.split(";")
     timing = instance.timing.split(";")
+    j=0
     context = {
         "title" : instance.title,
         "object" : instance,
@@ -52,12 +52,20 @@ def detail(request,id=id):
         "nos" : nos,
         "pac" : pac,
         "timing" : timing,
-    }
+        "j" : j,
+
+    } 
     print context
     #print obj_equip
     return render(request,'details.html',context)
 
-
+def photo(request,id=id):
+    inst_pho = Photos.objects.filter(gym_id=id)    
+    context = {
+        "obj_photos" : inst_pho,
+        } 
+    return render(request,'photos.html',context)
+    
 def html_test(request):
     return render(request,'base.html')
 
