@@ -4,9 +4,6 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-# def upload_location(instance,filename):
-# 	return "%s/%s" %(instance.id,filename)
-
 # Create your models here.
 class Gym(models.Model):
 	title=models.CharField(max_length=120,null=False)
@@ -75,8 +72,3 @@ class Photos(models.Model):
 		return self.name
 	def __str__(self):
 		return self.name
-
-
-
-# http://127.0.0.1:8000/media/car.jpg
-# http://127.0.0.1:8000/media/23/car_Rhzw6Lu.jpg
