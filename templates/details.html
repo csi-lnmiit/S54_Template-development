@@ -1,28 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<style>
-.det_imgheight{
-height: 50vh;
-}
-.det_photoht{
-height: 30vh;
-}
-.d{
-	display:block;
-}
-.c{
-		
-}
-.pad{
-	padding-top: 35px
-}
-.detail_split{
-	padding-left: 10px
-}
-.detail_notsplit{
-	padding-left: 10px
-}
-</style>
+{% load staticfiles %}
+<link href="{% static 'css/details.css' %}" rel="stylesheet">
 <div class="container" style="padding-left: 100px">
 	<div  style="padding-top:20px" >
 		<div class="card" style="height:75vh" >
@@ -106,44 +85,41 @@ height: 30vh;
 				</div>
 		</div>
 		<div class="pad">
-		<div class="card">
-			<div class = "card-body">
-				<div class="row">
-					<h4><b style ="padding-left: 20px" class="card-title">PHOTOS</b></h4>
-				</div>
-				<div class = "row">
-				{% for im in obj_photos %}
-					<div class="col-md-3">
-						<div class="card">
-							<a href='/home/{{object.id}}/photos'><img class="card-img det_photoht" style="display: inline-block;" src='{{ im.image.url}}' alt="card image cap"></a>
+			<div class="card">
+				<div class = "card-body">
+					<div class="row">
+						<h4><b style ="padding-left: 20px" class="card-title">PHOTOS</b></h4>
+					</div>
+					<div class = "row">
+						<div class="col-md-3">
+							<div class="card">
+								<a href='/home/{{object.id}}/photos'><img class="card-img det_photoht" style="display: inline-block;" src='{{ obj_photos.0.image.url}}' alt="card image cap"></a>
+							</div>
 						</div>
-					</div>				
-				{% endfor %}
-					<!-- <div class="col-md-3">
-						<div class="card">
-							<img class="card-img" src='{{ object.cover_image.url}}' alt="card image cap">
+						<div class="col-md-3">
+							<div class="card">
+								<a href='/home/{{object.id}}/photos'><img class="card-img det_photoht" style="display: inline-block;" src='{{ obj_photos.1.image.url}}' alt="card image cap"></a>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card">
+								<a href='/home/{{object.id}}/photos'><img class="card-img det_photoht" style="display: inline-block;" src='{{ obj_photos.2.image.url}}' alt="card image cap"></a>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card card-inverse">
+								<a href='/home/{{object.id}}/photos'>
+									<img class="card-img det_photoht" src='{{ obj_photos.3.image.url}}' alt="card image cap">
+									<div class="card-img-overlay">
+										<b><p class="hover" style="color:black;font-size: 20px;padding-top: 40px">+10459&nbsp;photos</p></b>
+									</div>
+								</a>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-3">
-						<div class="card">
-							<img class="card-img" src='{{ object.cover_image.url}}' alt="card image cap">
-						</div>
-					</div> -->
-					<!-- <div class="col-md-3">
-						<div class="card card-inverse">
-							<a href="https://www.zomato.com/HauzKhasSocial/photos" data-res_id="308322">
-								<img class="card-img" src='{{ object.cover_image.url}}' alt="card image cap">
-								<div class="card-img-overlay">
-	                    			<b><p class="hover" style="color:black;font-size: 20px;padding-top: 40px">+10459&nbsp;photos</p></b>
-                				</div>
-            				</a>
-						</div>
-					</div> -->
 				</div>
 			</div>
 		</div>
-		</div>
-
 	</div>
 
 </div>
