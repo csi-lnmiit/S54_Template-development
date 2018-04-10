@@ -13,7 +13,6 @@
     <!-- Bootstrap core CSS -->
     <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" integrity="sha384-DmABxgPhJN5jlTwituIyzIUk6oqyzf3+XuP7q3VfcWA2unxgim7OSSZKKf0KSsnh" crossorigin="anonymous">
-    <!-- Custom styles for this template -->
     <link href="{% static 'css/full-slider.css' %}" rel="stylesheet">
   </head>
 
@@ -24,7 +23,7 @@
       <div class="container">
          <a class="navbar-brand" href="#">
             <div class="nav-item">
-              <form action="." method="post">
+              <form method="post">
               <!-- trying something -->
                 {% csrf_token %}
                 <input type="text"  placeholder="Search here for Gyms....." name="search" 
@@ -95,7 +94,7 @@
     </div> <!-- Ending of main container -->
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark">
+    <footer class="py-5 bg-dark" >
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
       </div>

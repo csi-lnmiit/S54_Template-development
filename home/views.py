@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -18,12 +17,15 @@ def main(request):
     except EmptyPage:
         queryset = paginator.page(paginator.num_pages)
     if(request.method == 'POST'):
-        tit= request.POST['search']
-        text="dhcvhsv"
-        todo = Post(title=tit, text=text)
-        todo.save()
-
-        return redirect('/home')
+        search= request.POST['search']
+        todo = Gym.objects.filter(title__icontains=search)
+        context = {
+        "object_list" : todo,
+        "title" : "Search Result of " + search,
+        "search" : search,
+        "page": page,
+        }
+        return render(request,'search.html',context)
     else:
     	context={
         "object_list" : queryset,
@@ -43,6 +45,8 @@ def detail(request,id=id):
     pac=instance.charges.split(";")
     timing = instance.timing.split(";")
     j=0
+    for p in inst_pho:
+        j+=1
     context = {
         "title" : instance.title,
         "object" : instance,
@@ -85,5 +89,3 @@ def signup(request):
     
 def html_test(request):
     return render(request,'base.html')
-
-
