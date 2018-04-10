@@ -1,5 +1,18 @@
- {% for obj in object_list %}
-          {{obj.title}}<br/>
-          {{obj.text}}<br/>
-          {{obj.id}}<br/>
-        {% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>SignUp | GYMS</title>
+</head>
+
+<body>
+	<div class = "row">
+		<h2>Sign up</h2>
+		<form method="post">
+			{{ form.as_p }}
+			<button type="submit">Sign up</button>
+		</form>
+	</div>
+
+
+</body>

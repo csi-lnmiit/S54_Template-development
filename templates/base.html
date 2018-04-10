@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
   {% load staticfiles %}
@@ -45,9 +45,24 @@
             <li class="nav-item">
               <a class="nav-link" href="#">About</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
+              <a class="nav-link" href="#">{{user.username}}</a>
             </li>
+            {% else %}
+            <li class="nav-item">
+              <div class="dropdown">
+                <a href="#">
+                  <button class="btn dropdown-toggle" type="button" id="signin/signup" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sign in
+                  </button>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="signin/signup">
+                  <a class="dropdown-item" href="home/signin">Sign In</a>
+                  <a class="dropdown-item" href="home/signup">SignUp</a>
+                </div>
+              </div>
+            </li>
+            {% endif %}
             <li class="nav-item">
               <a class="nav-link" href="#">Contact</a>
             </li>
