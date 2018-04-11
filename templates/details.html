@@ -35,7 +35,7 @@
 						<h3>Any field</h3>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-5">
 					<div class="row d">
 						<h3>Equipments present</h3>
 						<div class="detail_notsplit">{% for eq in obj_equip %}
@@ -44,7 +44,7 @@
 								<div class="col-md-4">
 									<div style="color: green">Specs : </div>
 								</div>
-								<div class="col-md-8">
+								<div class="col-md-6">
 									{{eq.specs}}
 									
 								</div>
@@ -54,7 +54,7 @@
 								<div class="col-md-4">
 									<div style="color: blue">Purpose</div>
 								</div>
-								<div class="col-md-8" style="position: right"	>
+								<div class="col-md-6" style="position: right"	>
 									{{eq.purpose}}
 								</div>
 							</div>
@@ -62,13 +62,16 @@
 					</div>
 					<div class="row d pad" >
 						<h3 class="c">Address</h3>
-						
-						{% for b in com_add %}
-							<div class="detail_notsplit">{{ b }}<br/></div>
-						{% endfor %}
+						<div class="row">
+						<div class="col-md-11">
+							{% for b in com_add %}
+								<div class="detail_notsplit pad_right">{{ b }}<br/></div>
+							{% endfor %}
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class ="col-md-4">
+				<div class ="col-md-3.5">
 					<div class="row d">
 						<h3>Opening hours</h3>
 						{% for a in timing %}

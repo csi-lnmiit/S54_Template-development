@@ -7,18 +7,17 @@ from django.shortcuts import render,redirect
 from .models import *
 
 def main(request):
-    queryset_list = Gym.objects.all()
-    paginator = Paginator(queryset_list, 4) # Show 25 contacts per page
-    page = request.GET.get('page')
-    try:
-        queryset = paginator.page(page)
-    except PageNotAnInteger:
-        queryset = paginator.page(1)
-    except EmptyPage:
-        queryset = paginator.page(paginator.num_pages)
     if(request.method == 'POST'):
         search= request.POST['search']
-        todo = Gym.objects.filter(title__icontains=search)
+        todo_list = Gym.objects.filter(title__icontains=search)
+        paginator = Paginator(todo_list , 4) # Show 25 contacts per page
+        page = request.GET.get('page')
+        try:
+            todo = paginator.page(page)
+        except PageNotAnInteger:
+            todo = paginator.page(1)
+        except EmptyPage:
+            todo = paginator.page(paginator.num_pages)
         context = {
         "object_list" : todo,
         "title" : "Search Result of " + search,
@@ -27,6 +26,15 @@ def main(request):
         }
         return render(request,'search.html',context)
     else:
+        queryset_list = Gym.objects.all()
+        paginator = Paginator(queryset_list, 4) # Show 25 contacts per page
+        page = request.GET.get('page')
+        try:
+            queryset = paginator.page(page)
+        except PageNotAnInteger:
+            queryset = paginator.page(1)
+        except EmptyPage:
+            queryset = paginator.page(paginator.num_pages)
     	context={
         "object_list" : queryset,
     	"title":"GYMS",
