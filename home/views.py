@@ -5,6 +5,7 @@ from django.http import HttpResponse , HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render,redirect
 from .models import *
+from .forms import SignUpForm
 
 def main(request):
     if(request.method == 'POST'):
@@ -70,7 +71,6 @@ def detail(request,id=id):
 
     } 
     print context
-    #print obj_equip
     return render(request,'details.html',context)
 
 def photo(request,id=id):
@@ -82,7 +82,7 @@ def photo(request,id=id):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -91,9 +91,11 @@ def signup(request):
             login(request, user)
             return redirect('home')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
     
+def login(request):
+    return render(request,'login.html')
     
 def html_test(request):
     return render(request,'base.html')
