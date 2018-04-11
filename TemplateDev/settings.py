@@ -120,7 +120,7 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static")
 MEDIA_URL="/media/"
 MEDIA_ROOT = os.path.join((BASE_DIR),"media_cdn")
 
-# LOGIN_URL = 'login'
-# LOGOUT_URL = 'logout'
-# LOGIN_REDIRECT_URL = 'home'
-# LOGOUT_REDIRECT_URL = 'home'
+ # LOGIN_URL = 'login'
+ # LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'main'
+LOGOUT_REDIRECT_URL = 'main'
