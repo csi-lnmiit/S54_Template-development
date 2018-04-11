@@ -6,6 +6,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render,redirect
 from .models import *
 from .forms import SignUpForm
+from django.contrib.auth.models import User
+from django import forms
+
+
 
 def main(request):
     if(request.method == 'POST'):
@@ -92,12 +96,25 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('main')
+            userObj = form.cleaned_data
+            username = userObj['username']
+            password1 = userObj['password1']
+            password2 = userObj['password2']
+            email = userObj['email']
+            if (password1 != password2):
+                context = {
+                    "mesaage" : "Passwords didn't match",
+                    "username" : username,
+                    "form" : form,
+                }
+                return render(request, 'signup.html', context)
+            if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
+                User.objects.create_user(username, email, password1)
+                user = authenticate(username=username, password=password1)
+                login(request, user)
+                return redirect('main')
+            else :
+                 raise forms.ValidationError('Looks like a username with that email and username already exists')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
