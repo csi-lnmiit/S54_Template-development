@@ -100,10 +100,24 @@ def signup(request):
             username = userObj['username']
             password1 = userObj['password1']
             password2 = userObj['password2']
+            first_name = userObj['first_name']
+            last_name = userObj['last_name']
             email = userObj['email']
+            if (User.objects.filter(username=username).exists()):
+                context = {
+                    "message" : "Username already exists",
+                    "form" : form,
+                }
+                return render(request, 'signup.html', context)
+            if (User.objects.filter(email=email).exists()):
+                context = {
+                    "message" : "Email already exists",
+                    "form" : form,
+                }
+                return render(request, 'signup.html', context)
             if (password1 != password2):
                 context = {
-                    "mesaage" : "Passwords didn't match",
+                    "message" : "Passwords didn't match",
                     "username" : username,
                     "form" : form,
                 }
