@@ -2,22 +2,15 @@
 {% block content %}
 {% load staticfiles %}
 <link href="{% static 'css/photos.css' %}" rel="stylesheet">
-<style>
-.det_photoht{
-height: 30vh;
-}
-</style>
 <div class="pad detail_split">
 	<div class="card">
 		<body data-spy="scroll" data-offset="50">
 			<div class = "row">
 						{% for im in obj_photos %}
 							<div class="col-md-3 pad">
-							
 								<div class="card">
 									<img class="card-img det_photoht" style="display: inline-block;" src='{{ im.image.url}}' alt="card image cap">
 								</div>
-							
 							</div>	
 						{% endfor %}
 			</div>
