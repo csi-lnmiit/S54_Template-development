@@ -22,42 +22,48 @@
 	<div class = "row container main-agileits">
 		<h1 class="sub-head">Sign up</h1>
 		<form method="post" class="sub-main">
+				{{message}}
 			<div class = "row">	
 				{% csrf_token %}
 				<div class = "form-group row">
+					<span id="first_name" class="col-md-3">
+						<i class="fa fa-smile fa-2x"></i>
+						{{form.first_name}}
+					</span>
+				</div>
+				<div class = "form-group row">
+					<span id="last_name" class="col-md-3">
+						<i class="fa fa-smile fa-2x"></i>
+						{{form.last_name}}
+					</span>
+				</div>
+				<div class = "form-group row">
 					<span id="username" class="col-md-3">
-						<i class="fa fa-user"></i>
+						<i class="fa fa-user fa-2x"></i>
 						{{form.username}}
 					</span>
 				</div>
 				<div class = "form-group row">
-					<label for="password1" class="col-md-4 col-form-label">
-						Password 
-					</label>
-
+					<span id="password2" class="col-md-3">
+						<i class="fa fa-envelope fa-2x"></i>
+						{{form.email}}
+					</span>
+				</div>
+				<div class = "form-group row">
 					<span id="password1" class="col-md-3">
+						<i class="fa fa-unlock fa-2x"></i>
 						{{form.password1}}
 					</span>
 				</div>
 				<div class = "form-group row">
-					<label for="password2" class="col-md-4 col-form-label">
-						Confirm Password : 
-					</label>
 					<span id="password2" class="col-md-3">
+						<i class="fa fa-unlock fa-2x"></i>
 						{{form.password2}}
 					</span>
 				</div>
- 				<div class = "form-group row">
-					<label for="password2" class="col-md-4 col-form-label">
-						Email : 
-					</label>
-					<span id="password2" class="col-md-3">
-						{{form.email}}
-					</span>
-				</div>
 				<input type="submit" value="signup"></input>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 
 
