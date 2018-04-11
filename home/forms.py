@@ -1,4 +1,4 @@
-from django import forms
+quifrom django import forms
 
 class SignUpForm(forms.Form):
 	username = forms.CharField(
