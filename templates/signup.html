@@ -25,9 +25,6 @@
 			<div class = "row">	
 				{% csrf_token %}
 				<div class = "form-group row">
-					<label for="username" class="col-form-label">
-						UserName 
-					</label>
 					<span id="username" class="col-md-3">
 						{{form.username}}
 					</span>
@@ -49,6 +46,14 @@
 						{{form.password2}}
 					</span>
 				</div>
+<!-- 				<div class = "form-group row">
+					<label for="password2" class="col-md-4 col-form-label">
+						Fisrt Name : 
+					</label>
+					<span id="password2" class="col-md-3">
+						{{form.first_name}}
+					</span>
+				</div> -->
 				<input type="submit" value="signup"></input>
 			</form>
 		</div>
