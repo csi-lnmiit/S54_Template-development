@@ -9,22 +9,30 @@ from .forms import SignUpForm
 
 def main(request):
     if(request.method == 'POST'):
+        c=0
         search= request.POST['search']
         todo_list = Gym.objects.filter(title__icontains=search)
-        paginator = Paginator(todo_list , 4) # Show 25 contacts per page
-        page = request.GET.get('page')
-        try:
-            todo = paginator.page(page)
-        except PageNotAnInteger:
-            todo = paginator.page(1)
-        except EmptyPage:
-            todo = paginator.page(paginator.num_pages)
-        context = {
-        "object_list" : todo,
-        "title" : "Search Result of " + search,
-        "search" : search,
-        "page": page,
-        }
+        if(todo_list):
+            paginator = Paginator(todo_list , 4) # Show 25 contacts per page
+            page = request.GET.get('page')
+            try:
+                todo = paginator.page(page)
+            except PageNotAnInteger:
+                todo = paginator.page(1)
+            except EmptyPage:
+                todo = paginator.page(paginator.num_pages)
+            context = {
+            "object_list" : todo,
+            "title" : "Search Result of " + search,
+            "search" : search,
+            "page": page,
+            }
+        else:
+            context = {
+            "title" : "Search Result of " + search,
+            "search" : search,
+            "c" : c+1
+            }
         return render(request,'search.html',context)
     else:
         queryset_list = Gym.objects.all()
