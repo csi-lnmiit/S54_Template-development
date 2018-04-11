@@ -1,17 +1,34 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 
+class SignUpForm(forms.Form):
+	username = forms.CharField(
+		required = True,
+		label = 'Username',
+		max_length = 32,
+		widget=forms.TextInput(
+			attrs={'placeholder':' Username'},
+			),
+	)
+	email = forms.CharField(
+		required = True,
+		label = 'Email',
+		max_length = 32,
+	)
+	password1 = forms.CharField(
+		required = True,
+		label = 'Password1',
+		max_length = 32,
+		widget = forms.PasswordInput()
+	)
+	password2 = forms.CharField(
+		required = True,
+		label = 'Password2',
+		max_length = 32,
+		widget = forms.PasswordInput()
+	)
+	first_name = forms.CharField(
+		required = True,
+		label = 'First_Name',
+		max_length = 32,
 
-class SignUpForm(UserCreationForm):
-	first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-	last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-	email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-
-	def __init__(self, *args, **kwargs):
-		super(SignUpForm, self).__init__(*args, **kwargs)
-		self.fields['username'].widget.attrs['placeholder'] = 'Username'
-
-	class Meta:
-		model = User
-		fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+		)
