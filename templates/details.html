@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+<head>
+</head>
+{% block content %}
+{% load staticfiles %}
+<link href="{% static 'css/details.css' %}" rel="stylesheet">
+<div class="container" style="padding-left: 100px">
+	<div  style="padding-top:20px" >
+		<div class="card" style="height:75vh" >
+			<img class="card-img-top det_imgheight" src='{{ object.cover_image.url}}' alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">{{object.title}}</h5>
+				<p class="card-text">{{obj_add.locality}}</p>
+				<p class="card-text">{{obj_equip.name}}</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
+	</div>
+	<div class="pad">
+		<div class="card">
+			<div class="row card-body" style="padding-top: 26px">
+				<div class="col-md-3">
+					<div class="row d ">
+						<h3>Contact number</h3>
+						{% for a in nos %}
+							<div class="detail_split">+91-{{ a }}<br/></div>
+						{% endfor %}
+					</div>
+					<div class="row pad d" >
+						<h3 `>Gym Packages</h3>
+						<ul>
+						{% for p in pac %}
+							<li><div class="detail_split">{{ p }}<br/></div></li>
+						{% endfor %}</ul>
+					</div>
+					<div class="row pad">
+						<h3>Any field</h3>
+					</div>
+				</div>
+				<div class="col-md-5">
+					
+					<div class="row d">
+						<h3>Equipments present</h3>
+						<div class="detail_notsplit">
+						{% for eq in obj_equip %}
+							<h6 data-toggle="tooltip" title="Specs : {{eq.specs}}
+Purpose : {{eq.purpose}}">{{eq.name}}</h6>
+						{% endfor %}
+						</div>
+					</div>
+					<div class ="row pad d">
+						<h3>Location</h3>
+						
+						<div id="map" style="width:300px;height:200px;background:yellow"></div>
+							
+					</div>
+				</div>
+				<div class ="col-md-4">
+					<div class="row d">
+						<h3>Opening hours</h3>
+						{% for a in timing %}
+							<div class="detail_split">{{ a }}<br/></div>
+						{% endfor %}
+					</div>
+					<div class="row d pad" >
+						<h3 class="c">Address</h3>
+						<div class="row">
+						<div class="col-md-11">
+							{% for b in com_add %}
+								<div class="detail_notsplit pad_right">{{ b }}<br/></div>
+							{% endfor %}
+							</div>
+						</div>
+					</div>
+					<!-- <div class ="row pad">
+						<h3 class="c">Any field 3</h3>
+					</div> -->
+				</div>
+				</div>
+		</div>
+		<div class="pad">
+			<div class="card">
+				<div class = "card-body">
+					<div class="row">
+						<h4><b style ="padding-left: 20px" class="card-title">PHOTOS</b></h4>
+					</div>
+					<div class = "row">
+						<div class="col-md-3">
+							<div class="card">
+								<img class="card-img det_photoht" style="display: inline-block;" src='{{ obj_photos.0.image.url}}' alt="card image cap">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card">
+								<img class="card-img det_photoht" style="display: inline-block;" src='{{ obj_photos.1.image.url}}' alt="card image cap">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card">
+								<img class="card-img det_photoht" style="display: inline-block;" src='{{ obj_photos.2.image.url}}' alt="card image cap">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card card-inverse">
+								<a href='/home/{{object.id}}/photos'>
+									<img class="card-img det_photoht" src='{{ obj_photos.3.image.url}}' alt="card image cap">
+									<div class="card-img-overlay">
+										<b><p class="hover" style="color:black; font-size: 33px;padding-top: 10px">+{{j}}&nbsp;photos</p></b>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
+<script>
+								function myMap() {
+								var mark = {lat:28.644800,lng:77.216721}
+								var mapOptions = {
+								    center: mark,
+								    zoom: 12,
+								    MapTypeIdypeId: google.maps.MapTypeId.HYBRID
+								}
+								var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+								var marker = new google.maps.Marker({
+		          					position: mark,
+		          					map: map
+		        					});
+								}
+							</script>
+
+						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuAxjkVyALkrCBKDJEBd5FEVtFSaJLnGA&callback=myMap"></script>
+
+{% endblock content %}
+
+
+
+
+                    
+                

@@ -1,43 +1,14 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
-<html>
-<head>
+{% load static %}
+<html lang="en">
 
-<title>GYM HI GYM</title>
-{% load staticfiles %}
-</head> 
-<body>
-<header><link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" >
-        <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}" type="text/css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" integrity="sha384-DmABxgPhJN5jlTwituIyzIUk6oqyzf3+XuP7q3VfcWA2unxgim7OSSZKKf0KSsnh" crossorigin="anonymous">
+  <head>
+  </head>
 
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-<link href="{% static 'css/full-slider.css' %}"  rel="stylesheet">
-
-  <div class="bg-container">
-    <div class="row">
-
-       <div class="content">
-          <h1>{{title}} For Gyms</h1>
-          <div class="topnav " style="margin-left: 30px;">
-            
-                <form action="." method="post">
-                <!-- trying something -->
-                {% csrf_token %}
-                <input type="text"  placeholder="           Search here for Gyms....." name="search" id="search" style= "width:120vh;">
-                <button class="btn btn-lg  lefty">
-                <i class="fas fa-search"></i>
-                </button>
-                <!-- <div class="search"><b>Locate Gyms.....</b></div> -->
-                <div class="righty">
-                  <a class="active" href="#home">Login</a>
-                  <a class="passive" href="#about">Create Account</a>
-                  <!-- <a href="#contact">Contact</a> -->
-                </div>
-                
-            </div>
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" class="row">
+  <body>
+    {% block initial %}
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -45,21 +16,21 @@
         </ol>
         <div class="carousel-inner" role="listbox">
           <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
+          <div class="carousel-item active" style="background-image: url('{% static 'images/1.jpg'%}')">
             <div class="carousel-caption d-none d-md-block">
               <h3>First Slide</h3>
               <p>This is a description for the first slide.</p>
             </div>
           </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+          <div class="carousel-item" style="background-image: url('{% static 'images/2.jpg'%}')">
             <div class="carousel-caption d-none d-md-block">
               <h3>Second Slide</h3>
               <p>This is a description for the second slide.</p>
             </div>
           </div>
           <!-- Slide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+          <div class="carousel-item" style="background-image: url('{% static 'images/3.jpg'%}')">
             <div class="carousel-caption d-none d-md-block">
               <h3>Third Slide</h3>
               <p>This is a description for the third slide.</p>
@@ -75,38 +46,56 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-          </div>
+      {% endblock initial %}
+
+
+    <!-- Page Content -->
+    <!-- The main container -->
+    {% block content %}
+      <!-- left side bar -->
+      <div class = "col-md-2 container">
       </div>
-    </div>
-</header>
-<script>
-var slideIndex = 1;
-showSlides(slideIndex);
+      <!-- Main content -->
+      <div class = "col-md-7">
+        <section class="py-5">
+          <div class="container">
+            <h1>List of Gyms</h1>
+            {% for obj in object_list %}
+            <div class="card">
+              <img class="card-img-top" style="height:30vh" src="{{obj.cover_image.url}}" alt="{{obj.title}}">
+              <div class="card-body">
+                <a href='/home/{{obj.id}}/'><h5 class="card-title">{{obj.title}}</h5></a>
+                <p class="card-text">{{obj.content_short}}</p>
+                <p><a href='/home/{{obj.id}}/' class="btn btn-primary" role="button">View</a> </p>
+              </div>
+            </div>
+            <br/>
+            <br/>
+            {% endfor %}
+          </div>
+        
+        <div class="pagination">
+          <span class="step-links">
+        {% if object_list.has_previous %}
+            <!-- <a href="?page=1">&laquo; first</a> -->
+            <a href="?page={{ object_list.previous_page_number }}">previous</a>
+        {% endif %}
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+        <span class="current">
+            Page {{object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
 
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+        {% if object_list.has_next %}
+            <a href="?page={{object_list.next_page_number }}">next</a>
+            <a href="?page={{object_list.paginator.num_pages }}">last</a>
+        {% endif %}
+    </span>
+        </div></section>
+      </div>   <!-- Ending Main Content -->
+    
+    {% endblock content %}
 
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-}
-</script>
-</body>
-<!-- <script src="bootstrap/bootstrap.min.js"></script> -->
+  </body>
+
 </html>
+<!-- bootstrap/js/bootstrap.bundle.min.js -->

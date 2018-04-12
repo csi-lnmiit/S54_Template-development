@@ -70,8 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'TemplateDev.wsgi.application'
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
@@ -80,20 +79,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': os.path.join(BASE_DIR, 'mysql'),
-#         #'NAME': 'temp',
-#         'USER':'root',
-#         'PASSWORD':'16ucs142',
-#         'HOST':'',
-#         'PORT':''
-#     }
-# }
-
-# Password validation
-# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -110,10 +95,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.11/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -124,10 +105,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
-
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS =[
@@ -135,3 +112,15 @@ STATICFILES_DIRS =[
 ]
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static")
+
+# MEDIA_URL = '/media'
+# MEDIAFILES_DIRS =[
+#     os.path.join(BASE_DIR,"media_cdn")
+# ]
+MEDIA_URL="/media/"
+MEDIA_ROOT = os.path.join((BASE_DIR),"media_cdn")
+
+ # LOGIN_URL = 'login'
+ # LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'main'
+LOGOUT_REDIRECT_URL = 'main'

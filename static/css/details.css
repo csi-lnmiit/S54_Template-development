@@ -1,0 +1,28 @@
+
+.det_imgheight{
+height: 50vh;
+}
+.det_photoht{
+height: 30vh;
+}
+.d{
+	display:block;
+}
+.c{
+		
+}
+.pad{
+	padding-top: 35px
+}
+.detail_split{
+	padding-left: 10px
+}
+.detail_notsplit{
+	padding-left: 10px
+}
+.pad_left{
+	padding-left: 10px
+}
+.pad_right{
+	padding-right: 20px
+}
