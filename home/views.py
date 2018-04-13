@@ -125,6 +125,7 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
     
 
-    
+def profile(request):
+    return render(request, 'profile.html')
 def html_test(request):
     return render(request,'base.html')

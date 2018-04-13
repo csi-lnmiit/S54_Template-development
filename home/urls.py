@@ -8,6 +8,7 @@ urlpatterns = [
 	url(r'^$' ,views.main,name = "main"),
 	url(r'^signup/$' ,views.signup , name = "signup"),
 	url(r'^login/$' ,auth_views.login ,{'template_name': 'login.html'}, name = "login"),
+	url(r'^profile/$' ,views.profile, name = "profile"),
 	url(r'^logout/$' ,auth_views.logout , name = "logout"),
 	url(r'^(?P<id>\d+)/$' ,views.detail, name = "detail"),
 	url(r'^(?P<id>\d+)/photos/$' ,views.photo, name = "photo"),
