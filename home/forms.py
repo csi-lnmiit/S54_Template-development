@@ -1,4 +1,4 @@
-quifrom django import forms
+from django import forms
 
 class SignUpForm(forms.Form):
 	username = forms.CharField(
@@ -34,7 +34,7 @@ class SignUpForm(forms.Form):
 			),
 	)
 	first_name = forms.CharField(
-		required = True,
+		required = False,
 		label = 'First_Name',
 		max_length = 32,
 		widget=forms.TextInput(
@@ -42,7 +42,7 @@ class SignUpForm(forms.Form):
 			),
 		)
 	last_name = forms.CharField(
-		required = True,
+		required = False,
 		label = 'Last_Name',
 		max_length = 32,
 		widget=forms.TextInput(

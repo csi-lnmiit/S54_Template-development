@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render,redirect
 from .models import *
 from .forms import SignUpForm
-from django.contrib.auth.models import User
+from accounts.models import *
 from django import forms
 
 
@@ -65,9 +65,7 @@ def detail(request,id=id):
     nos=instance.contact.split(";")
     pac=instance.charges.split(";")
     timing = instance.timing.split(";")
-    j=0
-    for p in inst_pho:
-        j+=1
+    j=inst_pho.count()
     context = {
         "title" : instance.title,
         "object" : instance,
@@ -97,18 +95,11 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             userObj = form.cleaned_data
-            username = userObj['username']
             password1 = userObj['password1']
             password2 = userObj['password2']
             first_name = userObj['first_name']
             last_name = userObj['last_name']
             email = userObj['email']
-            if (User.objects.filter(username=username).exists()):
-                context = {
-                    "message" : "Username already exists",
-                    "form" : form,
-                }
-                return render(request, 'signup.html', context)
             if (User.objects.filter(email=email).exists()):
                 context = {
                     "message" : "Email already exists",
@@ -122,9 +113,9 @@ def signup(request):
                     "form" : form,
                 }
                 return render(request, 'signup.html', context)
-            if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
-                User.objects.create_user(username, email, password1)
-                user = authenticate(username=username, password=password1)
+            if not (User.objects.filter(email=email).exists()):
+                User.objects.create_user( email, password1)
+                user = authenticate(email=email, password=password1)
                 login(request, user)
                 return redirect('main')
             else :
