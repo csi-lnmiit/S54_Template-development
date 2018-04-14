@@ -67,6 +67,7 @@ def main(request):
 
 def detail(request,id=id):
     context= {}
+    count=0
     instance = Gym.objects.get(id=id)
     inst_add = (Address.objects.get(gym_id=id))
     com_add = inst_add.complete_add.split(";")
@@ -76,6 +77,11 @@ def detail(request,id=id):
     nos=instance.contact.split(";")
     pac=instance.charges.split(";")
     timing = instance.timing.split(";")
+    inst_review= Review.objects.filter(gym_id=id)
+    print(inst_review)
+    # for k in inst_review:
+    #     if use_id == k.user_id:
+    #         count+=1
     j=inst_pho.count()
     user,user_prof = get_user(request)
     if ('review' in request.POST):
@@ -88,7 +94,7 @@ def detail(request,id=id):
             p = Review.objects.create(gym_id=instance, user_id=user, content=review ,rating=4.0)
             p.save()
     elif ('comment'  in request.POST):
-         if(user==None):
+        if(user==None):
             error = "You must be logged in first to post a review"
             context.update({"error" : error})
         else:
@@ -106,7 +112,9 @@ def detail(request,id=id):
         "pac" : pac,
         "timing" : timing,
         "j" : j,
-
+        "user" : user,
+        "user_prof" : user_prof,
+        "obj_review" : inst_review,
     })
     return render(request,'details.html',context)
 
