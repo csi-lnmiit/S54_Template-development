@@ -7,6 +7,7 @@ from django.shortcuts import render,redirect
 from .models import *
 from .forms import SignUpForm
 from accounts.models import *
+from review.models import Review,Comment
 from django import forms
 
 
@@ -14,7 +15,7 @@ from django import forms
 def main(request):
     if(request.method == 'POST'):
         c=0
-        search= request.POST['search']
+        search = request.POST['search']
         todo_list = Gym.objects.filter(title__icontains=search)
         if(todo_list):
             paginator = Paginator(todo_list , 4) # Show 25 contacts per page
@@ -66,6 +67,12 @@ def detail(request,id=id):
     pac=instance.charges.split(";")
     timing = instance.timing.split(";")
     j=inst_pho.count()
+    user = request.user
+    if 'review' in request.POST:
+        review = request.POST['review']
+        p = Review.objects.create(gym_id=instance, user_id=user, content=review ,rating=4.0)
+        p.save()
+
     context = {
         "title" : instance.title,
         "object" : instance,

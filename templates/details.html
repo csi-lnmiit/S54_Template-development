@@ -114,6 +114,21 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 				</div>
 			</div>
 		</div>
+		<div class="pad">
+			<div class="card">
+				<div class="container">
+				  <p>Please add your valuable review here:</p>
+				  <form method="post">
+				  {% csrf_token %}
+				    <div class="form-group">
+				      <label for="Review">Review:</label>
+				      <textarea class="form-control" rows="5" id="review" name="review"></textarea>
+				      <button class="btn-primary" type="submit" >post</button>
+				    </div>
+				  </form>
+				</div>
+			</div>
+		</div>
 	</div>
 
 </div>
