@@ -45,7 +45,7 @@
           {% if user.is_authenticated %}
           <li>
             <div class="dropdown">
-              <a class="nav-link caret nav-item dropdown-toggle" data-toggle="dropdown" style="position: relative;">
+              <a class="nav-link caret nav-item dropdown-toggle" data-toggle="dropdown" style="position: relative;" aria-expanded="true">
                 {{user.email}}
               </a>
               <ul class="dropdown-menu">

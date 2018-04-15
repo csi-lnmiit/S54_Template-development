@@ -157,6 +157,7 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 										      <span id="Comment" class="input-group-text"><i class="fa fa-comments" style="font-size:36px;color:#8ea6cc"></i></span>
 										    </div>
 										    <input id="comment" type="text" class="form-control" name="comment" placeholder="Any Comments" aria-label="Username" aria-describedby="Comment">
+										    <input type="hidden" class="form-control" value="{{rev}}" name="reviewid" />
 									    </div>
 								  </form>
 							  {% endif %}
@@ -164,7 +165,7 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 							<div class="card-columns pad_left">
 									{% for com in obj_comment %}
 										{% if com.review_id == rev %}
-										<div class="card" style="width: 400px;">
+										<div class="card" style="width: 300px;">
 											<div class="card-body" >
 												<span class="card-text"><i class="fa fa-user"></i> <span style="color:blue;">{{com.user_id}}</span></span>
 												<p class="card-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{com}}</p>

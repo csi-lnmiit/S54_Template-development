@@ -105,8 +105,11 @@ def detail(request,id=id):
             error = "You must be logged in first to post a review"
             context.update({"error" : error})
         else:
-            pass
-
+            temp = request.POST['reviewid']
+            r = Review.objects.get(gym_id=id,content=temp)
+            comment = request.POST['comment']
+            p = Comment.objects.create(review_id=r,user_id=user,comment=comment)
+            p.save()
     context.update({
         "title" : instance.title,
         "object" : instance,
