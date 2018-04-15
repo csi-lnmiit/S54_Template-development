@@ -11,7 +11,7 @@ class Gym(models.Model):
 	content_short=models.TextField(null=True)
 	timing = models.TextField(null=True)
 	charges = models.CharField(max_length=150,null=True)
-	contact = models.CharField(max_length=100,null=True)	
+	contact = models.CharField(max_length=100,null=True)
 	updated=models.DateTimeField(auto_now=True,auto_now_add=False)
 	timestamp=models.DateTimeField(auto_now=False,auto_now_add=True)
     	
@@ -64,7 +64,7 @@ class Content_Long(models.Model):
 
 class Photos(models.Model):
 	gym_id = models.ForeignKey('Gym')
-	image = models.ImageField(null=True,blank=True)
+	image = models.ImageField(default="...",null=True,blank=True)
 	name = models.CharField(max_length=20,null=True)
 	updated=models.DateTimeField(auto_now=True,auto_now_add=False)
 	timestamp=models.DateTimeField(auto_now=False,auto_now_add=True)

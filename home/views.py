@@ -9,7 +9,7 @@ from .forms import SignUpForm
 from accounts.models import *
 from django import forms
 
-
+# user_prof = UserProfile.objects.get(user_id=request.user)
 
 def main(request):
     if(request.method == 'POST'):
