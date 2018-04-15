@@ -9,7 +9,7 @@ from .forms import SignUpForm
 from accounts.models import *
 from review.models import Review,Comment
 from django import forms
-
+from django.core.exceptions import ObjectDoesNotExist
 
 def get_user(request):
     if request.user.is_authenticated():
@@ -78,8 +78,16 @@ def detail(request,id=id):
     timing = instance.timing.split(";")
     j=inst_pho.count()
     inst_review= Review.objects.filter(gym_id=id)
+    inst_com= Comment.objects.filter(review_id__in=inst_review)
+    print(inst_com)
     user,user_prof = get_user(request)
-    user_rev = Review.objects.get(gym_id=id,user_id=user)
+    if (user) :
+        try:
+            user_rev = Review.objects.get(gym_id=id,user_id=user)
+        except ObjectDoesNotExist:
+            user_rev = None 
+    else : user_rev = None
+
     if ('review' in request.POST):
         if(user==None):
             error = "You must be logged in first to post a review"
@@ -112,7 +120,7 @@ def detail(request,id=id):
         "user_prof" : user_prof,
         "obj_review" : inst_review,
         "user_rev" : user_rev,
-
+        "obj_comment" : inst_com,
     })
     return render(request,'details.html',context)
 
