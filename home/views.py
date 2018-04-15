@@ -88,8 +88,8 @@ def detail(request,id=id):
             p = Review.objects.create(gym_id=instance, user_id=user, content=review ,rating=4.0)
             p.save()
     elif ('comment'  in request.POST):
-         if(user==None):
-            error = "You must be logged in first to post a review"
+        if(user==None):
+            error = "You must be logged in first to comment on a review"
             context.update({"error" : error})
         else:
             pass
