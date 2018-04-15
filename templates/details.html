@@ -139,8 +139,13 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 							<div class="pad pad_left pad_right">
 							<div class="card">
 								<div class="card-body">
-									<h5 class="card-title">{{rev.user_id}}</h5>
-									<p class="card-text">{{rev.content}}</p>
+									<span>
+										<i class="fa fa-user"></i>
+										<strong class="card-title" style="color:blue;">{{rev.user_id}}</strong>
+									</span>
+									<p class="card-text pad_left">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{rev.content}}
+									</p>
 								</div>
 							</div>
 								<br/>
@@ -156,13 +161,13 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 								  </form>
 							  {% endif %}
 							</div>
-							<div class="card">
+							<div class="card-columns pad_left">
 									{% for com in obj_comment %}
 										{% if com.review_id == rev %}
-										<div class="card" style="width: 500px;">
+										<div class="card" style="width: 400px;">
 											<div class="card-body" >
-												<h5 class="card-title">{{com.user_id}}</h5>
-												<p class="card-text">{{com}}</p>
+												<span class="card-text"><i class="fa fa-user"></i> <span style="color:blue;">{{com.user_id}}</span></span>
+												<p class="card-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{com}}</p>
 											</div>
 										</div>
 										{% endif %}
