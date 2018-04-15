@@ -112,7 +112,7 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 		<div class="pad">
 			<div class="card">
 				<div class="container">
-				{% if %}
+				{% if not user_rev %}
 				  <p>Please add your valuable review here:</p>
 				  <form method="post">
 					  {% csrf_token %}
@@ -126,11 +126,7 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 				{% else %}
 				  	<p> Your review </p>
 				  	<div class="card">
-					  	{% for rev in obj_review %}
-					  		{% if rev.user_id == user %}
-					  			{{ rev.content }}
-					  		{% endif %}
-					  	{% endfor %}
+				  		{{user_rev.content}}
 				  	</div>
 				{% endif %}
 				</div>
