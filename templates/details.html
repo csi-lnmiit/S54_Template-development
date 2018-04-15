@@ -49,7 +49,7 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 					<div class ="row pad d">
 						<h3>Location</h3>
 						
-						<div id="map" style="width:300px;height:200px;background:yellow"></div>
+						<div id="map" style="width:300px;height:200px;background:white"></div>
 							
 					</div>
 				</div>
@@ -135,36 +135,41 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 				<div class="card">
 					<h3>Reviews</h3>
 					{% if obj_review %}
-					{% for rev in obj_review %}
-					<div class="pad pad_left pad_right">
-					<div class="card">
-						{{ rev.content }}{{ use_id }}
-						<br/>
-						{% if user %}
-						  <form method="post">
-							  {% csrf_token %}
-							  	<div class="input-group pad pad_bottom">
-								  	<div  class="input-group-prepend">
-								      <span id="Comment" class="input-group-text"><i class="fa fa-comments" style="font-size:36px;color:#8ea6cc"></i></span>
-								    </div>
-								    <input id="comment" type="text" class="form-control" name="comment" placeholder="Any Comments" aria-label="Username" aria-describedby="Comment">
-							    </div>
-						  </form>
-					  {% endif %}
-					</div>
-					<div class="card" id="myList">
-						<ul>
-							{% for com in obj_comment %}
-								{% if com.review_id == rev %}
-									<li>{{com}}</li>
-								{% endif %}
-							{% endfor %}
-						</ul>
-						<div id="loadMore">Load more</div>
-						<div id="showLess">Show less</div>
-					</div>
-					</div>
-					{% endfor %}
+						{% for rev in obj_review %}
+							<div class="pad pad_left pad_right">
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">{{rev.user_id}}</h5>
+									<p class="card-text">{{rev.content}}</p>
+								</div>
+							</div>
+								<br/>
+								{% if user %}
+								  <form method="post">
+									  {% csrf_token %}
+									  	<div class="input-group pad pad_bottom">
+										  	<div  class="input-group-prepend">
+										      <span id="Comment" class="input-group-text"><i class="fa fa-comments" style="font-size:36px;color:#8ea6cc"></i></span>
+										    </div>
+										    <input id="comment" type="text" class="form-control" name="comment" placeholder="Any Comments" aria-label="Username" aria-describedby="Comment">
+									    </div>
+								  </form>
+							  {% endif %}
+							</div>
+							<div class="card">
+									{% for com in obj_comment %}
+										{% if com.review_id == rev %}
+										<div class="card" style="width: 500px;">
+											<div class="card-body" >
+												<h5 class="card-title">{{com.user_id}}</h5>
+												<p class="card-text">{{com}}</p>
+											</div>
+										</div>
+										{% endif %}
+									{% endfor %}
+							</div>
+							</div>
+						{% endfor %}
 					{% else %}
 					No reviews. Be the first one to post a review.
 					{% endif %}
@@ -181,28 +186,15 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 	{% endif %}
 
 	$(document).ready(function(){
-    	$('[data-toggle="tooltip"]').tooltip();   
-	}
-	function () {
-	    size_li = $("#myList li").size();
-	    x=3;
-	    $('#myList li:lt('+x+')').show();
-	    $('#loadMore').click(function () {
-	        x= (x+5 <= size_li) ? x+5 : size_li;
-	        $('#myList li:lt('+x+')').show();
-	    });
-	    $('#showLess').click(function () {
-	        x=(x-5<0) ? 3 : x-5;
-	        $('#myList li').not(':lt('+x+')').hide();
-	    });
-	});
+		$('[data-toggle="tooltip"]').tooltip();   
+	})
 
 	function myMap() {
 		var mark = {lat:28.644800,lng:77.216721}
 		var mapOptions = {
-		    center: mark,
-		    zoom: 12,
-		    MapTypeIdypeId: google.maps.MapTypeId.HYBRID
+			center: mark,
+			zoom: 12,
+			MapTypeIdypeId: google.maps.MapTypeId.HYBRID
 		}
 		var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 		var marker = new google.maps.Marker({

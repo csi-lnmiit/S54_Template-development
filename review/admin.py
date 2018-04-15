@@ -7,7 +7,7 @@ from .models import *
 class ReviewModelAdmin(admin.ModelAdmin):
 	list_display = ["gym_id","user_id","rating"]
 class CommentModelAdmin(admin.ModelAdmin):
-	list_display = ["user_id","comment"]
+	list_display = ["review_id","user_id","comment"]
 
 admin.site.register(Review,ReviewModelAdmin)
 admin.site.register(Comment,CommentModelAdmin)

@@ -10,6 +10,7 @@ from accounts.models import *
 from review.models import Review,Comment
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 
 def get_user(request):
     if request.user.is_authenticated():
@@ -21,7 +22,7 @@ def get_user(request):
         user_prof = None
         return user,user_prof
 
-def main(request):
+def search(request):
     if(request.method == 'POST'):
         c=0
         search = request.POST['search']
@@ -48,22 +49,24 @@ def main(request):
             "c" : c+1
             }
         return render(request,'search.html',context)
-    else:
-        queryset_list = Gym.objects.all()
-        paginator = Paginator(queryset_list, 4) # Show 25 contacts per page
-        page = request.GET.get('page')
-        try:
-            queryset = paginator.page(page)
-        except PageNotAnInteger:
-            queryset = paginator.page(1)
-        except EmptyPage:
-            queryset = paginator.page(paginator.num_pages)
-    	context={
+    else: return HttpResponseNotFound('<h1>Page not found</h1>')
+
+def main(request):
+    queryset_list = Gym.objects.all()
+    paginator = Paginator(queryset_list, 4) # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        queryset = paginator.page(1)
+    except EmptyPage:
+        queryset = paginator.page(paginator.num_pages)
+    context={
         "object_list" : queryset,
-    	"title":"GYMS",
+        "title":"GYMS",
         "page": page,
-    	}
-        return render(request,'index.html',context)
+    }
+    return render(request,'index.html',context)
 
 def detail(request,id=id):
     context= {}
@@ -164,9 +167,12 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
-    
 
 def profile(request):
     return render(request, 'profile.html')
+
 def html_test(request):
-    return render(request,'base.html')
+    raise Http404('<h1>Page not found</h1>')
+
+def contact(request):
+    return render(request,'contact.html')
