@@ -100,6 +100,4 @@ class UserProfile(models.Model):
 	first_name= models.CharField(verbose_name = 'first name',max_length = 32)
 	last_name= models.CharField(verbose_name = 'last name',max_length = 32)
 	age = models.IntegerField()
-	contact = models.CharField(max_length = 10)
-	profile_photo = models.ImageField(default="...",blank=True)
 	

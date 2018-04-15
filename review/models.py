@@ -13,7 +13,7 @@ class Review(models.Model):
 	likes = models.IntegerField(default=0)
 
 class Comment(models.Model):
-	review_id = models.ForeignKey('review.Review')
+	# review_id = models.ForeignKey('review.Review')
 	user_id = models.ForeignKey('accounts.User')
 	comment = models.TextField(null=True)
 # Create your models here.

@@ -1,6 +1,4 @@
 {% extends "base.html" %}
-<head>
-</head>
 {% block content %}
 {% load staticfiles %}
 <link href="{% static 'css/details.css' %}" rel="stylesheet">
@@ -134,27 +132,30 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 </div>
 
 <script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
-});
-</script>
-<script>
-								function myMap() {
-								var mark = {lat:28.644800,lng:77.216721}
-								var mapOptions = {
-								    center: mark,
-								    zoom: 12,
-								    MapTypeIdypeId: google.maps.MapTypeId.HYBRID
-								}
-								var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-								var marker = new google.maps.Marker({
-		          					position: mark,
-		          					map: map
-		        					});
-								}
-							</script>
+	{% if error %}
+		window.alert("{{error}}");
+	{% endif %}
 
-						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuAxjkVyALkrCBKDJEBd5FEVtFSaJLnGA&callback=myMap"></script>
+	$(document).ready(function(){
+    	$('[data-toggle="tooltip"]').tooltip();   
+	});
+
+	function myMap() {
+		var mark = {lat:28.644800,lng:77.216721}
+		var mapOptions = {
+		    center: mark,
+		    zoom: 12,
+		    MapTypeIdypeId: google.maps.MapTypeId.HYBRID
+		}
+		var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+		var marker = new google.maps.Marker({
+			position: mark,
+			map: map
+		});
+	}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuAxjkVyALkrCBKDJEBd5FEVtFSaJLnGA&callback=myMap">	
+</script>
 
 {% endblock content %}
 

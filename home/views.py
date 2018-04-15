@@ -10,7 +10,16 @@ from accounts.models import *
 from review.models import Review,Comment
 from django import forms
 
-# user_prof = UserProfile.objects.get(user_id=request.user)
+
+def get_user(request):
+    if request.user.is_authenticated():
+        user = request.user
+        user_prof = UserProfile.objects.get(user_id=user)
+        return user,user_prof
+    else :
+        user = None
+        user_prof = None
+        return user,user_prof
 
 def main(request):
     if(request.method == 'POST'):
@@ -57,6 +66,7 @@ def main(request):
         return render(request,'index.html',context)
 
 def detail(request,id=id):
+    context= {}
     instance = Gym.objects.get(id=id)
     inst_add = (Address.objects.get(gym_id=id))
     com_add = inst_add.complete_add.split(";")
@@ -67,13 +77,24 @@ def detail(request,id=id):
     pac=instance.charges.split(";")
     timing = instance.timing.split(";")
     j=inst_pho.count()
-    user = request.user
-    if 'review' in request.POST:
-        review = request.POST['review']
-        p = Review.objects.create(gym_id=instance, user_id=user, content=review ,rating=4.0)
-        p.save()
+    user,user_prof = get_user(request)
+    if ('review' in request.POST):
+        if(user==None):
+            error = "You must be logged in first to post a review"
+            context.update({"error" : error})
+        else:
+            review = request.POST['review']
+            # rating = request.POST['rating']
+            p = Review.objects.create(gym_id=instance, user_id=user, content=review ,rating=4.0)
+            p.save()
+    elif ('comment'  in request.POST):
+         if(user==None):
+            error = "You must be logged in first to post a review"
+            context.update({"error" : error})
+        else:
+            pass
 
-    context = {
+    context.update({
         "title" : instance.title,
         "object" : instance,
         "obj_add" : inst_add,
@@ -86,8 +107,7 @@ def detail(request,id=id):
         "timing" : timing,
         "j" : j,
 
-    } 
-    print context
+    })
     return render(request,'details.html',context)
 
 def photo(request,id=id):
