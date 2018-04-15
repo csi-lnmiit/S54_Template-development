@@ -112,22 +112,54 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 		<div class="pad">
 			<div class="card">
 				<div class="container">
+				{% if %}
 				  <p>Please add your valuable review here:</p>
 				  <form method="post">
-				  {% csrf_token %}
-				    <div class="form-group">
-				      <label for="Review">Review:</label>
-				      <textarea class="form-control" rows="5" id="review" name="review"></textarea>
-				      <button class="btn-primary" style="float: right;font-size:14px" type="submit" >Post   <i class="fa fa-edit"></i></button>
-				    </div>
+					  {% csrf_token %}
+					    <div class="form-group">
+					      <label for="Review">Your Review:</label>
+					      <textarea class="form-control" rows="5" id="review" name="review"></textarea>
+					      <div class="pad_bottom">
+					      <button class="btn-primary " style="float: right;font-size:14px" type="submit" >Post   <i class="fa fa-edit"></i></button></div>
+					    </div>
 				  </form>
-				  <form>
-				  	<div class="input-group pad">
-				  	<div  class="input-group-prepend">
-				      <span id="Comment" class="input-group-text"><i class="fa fa-comments" style="font-size:36px;color:#8ea6cc"></i></span></div>
-				      <input id="msg" type="text" class="form-control" name="msg" placeholder="Any Comments" aria-label="Username" aria-describedby="Comment">
-				    </div>
-				  </form>
+				{% else %}
+				  	<p> Your review </p>
+				  	<div class="card">
+					  	{% for rev in obj_review %}
+					  		{% if rev.user_id == user %}
+					  			{{ rev.content }}
+					  		{% endif %}
+					  	{% endfor %}
+				  	</div>
+				{% endif %}
+				</div>
+			</div>
+			<div class="pad">
+				<div class="card">
+					<h3>Reviews</h3>
+					{% if obj_review %}
+					{% for rev in obj_review %}
+					<div class="pad pad_left pad_right">
+					<div class="card">
+						{{ rev.content }}{{ use_id }}
+						<br/>
+						{% if user %}
+						  <form method="post">
+							  {% csrf_token %}
+							  	<div class="input-group pad pad_bottom">
+								  	<div  class="input-group-prepend">
+								      <span id="Comment" class="input-group-text"><i class="fa fa-comments" style="font-size:36px;color:#8ea6cc"></i></span>
+								    </div>
+								    <input id="comment" type="text" class="form-control" name="comment" placeholder="Any Comments" aria-label="Username" aria-describedby="Comment">
+							    </div>
+						  </form>
+					  {% endif %}
+					</div></div>
+					{% endfor %}
+					{% else %}
+					No reviews. Be the first one to post a review.
+					{% endif %}
 				</div>
 			</div>
 		</div>
