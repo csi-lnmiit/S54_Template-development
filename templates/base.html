@@ -44,14 +44,14 @@
           </li>
           {% if user.is_authenticated %}
           <li>
-            <div class="dropdown">
-              <a class="nav-link caret nav-item dropdown-toggle" data-toggle="dropdown" style="position: relative;" aria-expanded="true">
+            <div class="dropdown show">
+              <a class="nav-link caret nav-item dropdown-toggle" id="profile" data-toggle="dropdown" style="position: relative;" aria-haspopup="false" aria-expanded="true">
                 {{user.first_name}}
               </a>
-              <ul class="dropdown-menu">
-                <li ><a href="/home/profile" class="col_login">Edit Profile</a></li>
-                <li ><a href="/home/logout" class="col_login">Logout</a></li>
-              </ul>
+              <div class="dropdown-menu" aria-labelledby="profile">
+                <a href="/home/profile" class="dropdown-item">Edit Profile</a>
+                <a href="/home/logout" class="dropdown-item">Logout</a>
+              </div>
             </div>
           </li>
           {% else %}

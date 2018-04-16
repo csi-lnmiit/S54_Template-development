@@ -136,6 +136,8 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 					<h3>Reviews</h3>
 					{% if obj_review %}
 						{% for rev in obj_review %}
+						<div class="pad pad_left pad_right pad_bottom">
+						<div class="card">
 							<div class="pad pad_left pad_right">
 							<div class="card">
 								<div class="card-body">
@@ -152,7 +154,7 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 								{% if user %}
 								  <form method="post">
 									  {% csrf_token %}
-									  	<div class="input-group pad pad_bottom">
+									  	<div class="input-group  pad_bottom">
 										  	<div  class="input-group-prepend">
 										      <span id="Comment" class="input-group-text"><i class="fa fa-comments" style="font-size:36px;color:#8ea6cc"></i></span>
 										    </div>
@@ -173,7 +175,7 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 										</div>
 										{% endif %}
 									{% endfor %}
-							</div>
+							</div></div></div>
 						{% endfor %}
 					</div>
 					{% else %}
@@ -182,9 +184,8 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 				</div>
 			</div>
 		</div>
-	</div>
-
 </div>
+
 
 <script>
 	{% if error %}
