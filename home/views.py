@@ -181,17 +181,32 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 def profile(request):
-    if(request.method == 'POST'):
-        first = request.POST(first)
-        last = request.POST(last)
-        ag = request.POST(ag)
-        eml =  request.POST(eml)
-
-    user,user_prof= get_user(request)
-    context={
-    "user_profile" : user_prof,
-    }
-    return render(request, 'profile.html',context)
+    if (request.user.is_authenticated):
+        user,user_prof= get_user(request)
+        context = {}
+        if(request.method == 'POST'):
+            first_name = request.POST['first_name']
+            last_name = request.POST.get('last_name',None)
+            age = request.POST.get('age',None)
+            img = request.POST.get('prof_image',None)
+            email = request.POST['email']
+            try:
+                test=age+1
+            except TypeError:
+                age=None
+            user.email = email
+            user.first_name = first_name
+            user_prof.last_name = last_name
+            user_prof.prof_image = img
+            user_prof.age = age
+            user_prof.save()
+            user.save()
+        context.update({
+        "user_prof" : user_prof,
+        "title" : user.first_name
+        })
+        return render(request, 'profile.html',context)
+    else : redirect('login')
 
 def contact(request):
     return render(request,'contact.html')
