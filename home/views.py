@@ -11,6 +11,8 @@ from review.models import Review,Comment
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 
 def get_user(request):
     if request.user.is_authenticated():
@@ -188,12 +190,13 @@ def profile(request):
             first_name = request.POST['first_name']
             last_name = request.POST.get('last_name',None)
             age = request.POST.get('age',None)
-            img = request.POST.get('prof_image',None)
+            img = request.FILE.get('prof_image',None)
             email = request.POST['email']
             try:
                 test=age+1
             except TypeError:
                 age=None
+            fs = FileSystemStorage()
             user.email = email
             user.first_name = first_name
             user_prof.last_name = last_name
