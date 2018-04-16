@@ -1,14 +1,6 @@
-quifrom django import forms
+from django import forms
 
 class SignUpForm(forms.Form):
-	username = forms.CharField(
-		required = True,
-		label = 'Username',
-		max_length = 32,
-		widget=forms.TextInput(
-			attrs={'placeholder':'Username'},
-			),
-	)
 	email = forms.CharField(
 		required = True,
 		label = 'Email',
@@ -42,13 +34,22 @@ class SignUpForm(forms.Form):
 			),
 		)
 	last_name = forms.CharField(
-		required = True,
+		required = False,
 		label = 'Last_Name',
 		max_length = 32,
 		widget=forms.TextInput(
 			attrs={'placeholder':'Last Name'},
 			),
 		)
+	age = forms.IntegerField(
+		required = False,
+		label = 'Age',
+		widget = forms.TextInput(
+			attrs={'placeholder':'Age'},
+			)
+		)
+	
+
 	address = forms.CharField(
 		required = False,
 		label = 'address',

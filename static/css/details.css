@@ -26,3 +26,22 @@ height: 30vh;
 .pad_right{
 	padding-right: 20px
 }
+.pad_bottom{
+	padding-bottom: 20px
+}
+#myList li{ display:none;
+}
+#loadMore {
+    color:green;
+    cursor:pointer;
+}
+#loadMore:hover {
+    color:black;
+}
+#showLess {
+    color:red;
+    cursor:pointer;
+}
+#showLess:hover {
+    color:black;
+}

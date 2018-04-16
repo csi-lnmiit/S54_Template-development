@@ -11,7 +11,7 @@ class Gym(models.Model):
 	content_short=models.TextField(null=True)
 	timing = models.TextField(null=True)
 	charges = models.CharField(max_length=150,null=True)
-	contact = models.CharField(max_length=100,null=True)	
+	contact = models.CharField(max_length=100,null=True)
 	updated=models.DateTimeField(auto_now=True,auto_now_add=False)
 	timestamp=models.DateTimeField(auto_now=False,auto_now_add=True)
     	
@@ -25,7 +25,7 @@ class Address(models.Model):
 	gym_id = models.OneToOneField(Gym,on_delete=models.CASCADE,primary_key=True,)
 	locality = models.CharField(max_length=40,null=True)
 	city = models.CharField(max_length=40,null=True)
-	complete_add= models.CharField(max_length=100,null=True)
+	complete_add= models.CharField(verbose_name="complete address",max_length=100,null=True)
 	google_maps_add = models.CharField(max_length=100,null=True)
 	updated=models.DateTimeField(auto_now=True,auto_now_add=False)
 	timestamp=models.DateTimeField(auto_now=False,auto_now_add=True)
@@ -50,7 +50,7 @@ class Equipment(models.Model):
 
 
 class Content_Long(models.Model):
-	gym_id = models.OneToOneField(Gym,on_delete=models.CASCADE,primary_key=True,)
+	gym_id = models.OneToOneField(Gym,on_delete=models.CASCADE,primary_key=True)
 	detail1 = models.CharField(max_length=100,null=True)
 	detail2 = models.CharField(max_length=100,null=True)
 	detail3 = models.CharField(max_length=100,null=True)
@@ -64,7 +64,7 @@ class Content_Long(models.Model):
 
 class Photos(models.Model):
 	gym_id = models.ForeignKey('Gym')
-	image = models.ImageField(null=True,blank=True)
+	image = models.ImageField(default="...",null=True,blank=True)
 	name = models.CharField(max_length=20,null=True)
 	updated=models.DateTimeField(auto_now=True,auto_now_add=False)
 	timestamp=models.DateTimeField(auto_now=False,auto_now_add=True)
