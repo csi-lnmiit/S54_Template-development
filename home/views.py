@@ -181,7 +181,17 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 def profile(request):
-    return render(request, 'profile.html')
+    if(request.method == 'POST'):
+        first = request.POST(first)
+        last = request.POST(last)
+        ag = request.POST(ag)
+        eml =  request.POST(eml)
+
+    user,user_prof= get_user(request)
+    context={
+    "user_profile" : user_prof,
+    }
+    return render(request, 'profile.html',context)
 
 def contact(request):
     return render(request,'contact.html')
