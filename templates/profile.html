@@ -17,18 +17,14 @@
           {% else %}
           <i class="material-icons" style="font-size:100px">portrait</i>
           {% endif %}
-          <h6>Upload a different photo...</h6>
-          <form class="form-horizontal" role="form" method="post">
-            {% csrf_token %}
-          <input class="form-control" type="file" name="prof_img">
         </div>
       </div>
       
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
         <h3>Personal info</h3>
-        
-          
+        <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}          
           <div class="form-group">
             <label class="col-lg-3 control-label">First name:</label>
             <div class="col-lg-8">

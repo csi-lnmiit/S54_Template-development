@@ -5,7 +5,7 @@ from django.http import HttpResponse , HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render,redirect
 from .models import *
-from .forms import SignUpForm
+from .forms import *
 from accounts.models import *
 from review.models import Review,Comment
 from django import forms
@@ -187,26 +187,37 @@ def profile(request):
         user,user_prof= get_user(request)
         context = {}
         if(request.method == 'POST'):
-            first_name = request.POST['first_name']
-            last_name = request.POST.get('last_name',None)
-            age = request.POST.get('age',None)
-            img = request.FILE.get('prof_image',None)
-            email = request.POST['email']
-            try:
-                test=age+1
-            except TypeError:
-                age=None
-            fs = FileSystemStorage()
-            user.email = email
-            user.first_name = first_name
-            user_prof.last_name = last_name
-            user_prof.prof_image = img
-            user_prof.age = age
-            user_prof.save()
-            user.save()
+            user_prof_form = UserProfileForm(request.POST, request.FILES)
+            if user_prof_form.is_valid():
+                user_prof_obj = user_prof_form.cleaned_data
+                first_name  = request.POST['first_name']
+                email = request.POST['email']
+                last_name = user_prof_obj.get('last_name',None)
+                age = user_prof_obj.get('age',None)
+                try:
+                    test=age+1
+                except TypeError:
+                    age=None
+                user.email = email
+                user.first_name = first_name
+                user_prof.last_name = last_name
+                user_prof.age = age
+                user_prof.save()
+                user.save()
+            else :
+                raise forms.ValidationError('There is an error because of user_prof_form')
+        else :
+            user_prof_form = UserProfileForm(
+                    initial={
+                        'last_name': user_prof.last_name,
+                        'age' : user_prof.age,
+                        }
+                )
         context.update({
         "user_prof" : user_prof,
-        "title" : user.first_name
+        "title" : user.first_name,
+        # "user_form" : user_form,
+        "user_prof_form" : user_prof_form
         })
         return render(request, 'profile.html',context)
     else : redirect('login')
