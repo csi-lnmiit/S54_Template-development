@@ -1,7 +1,7 @@
 from django import forms
 
 class SignUpForm(forms.Form):
-	email = forms.CharField(
+	email = forms.EmailField(
 		required = True,
 		label = 'Email',
 		max_length = 32,
@@ -47,14 +47,4 @@ class SignUpForm(forms.Form):
 		widget = forms.TextInput(
 			attrs={'placeholder':'Age'},
 			)
-		)
-	
-
-	address = forms.CharField(
-		required = False,
-		label = 'address',
-		max_length = 32,
-		widget=forms.TextInput(
-			attrs={'placeholder':'Address'},
-			),
 		)

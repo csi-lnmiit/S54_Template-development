@@ -1,11 +1,12 @@
+
 {% extends "base.html" %}
 
 {% block content %}
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <div class="container">
     <h1>Edit Profile</h1>
-  	<hr>
-	<div class="row">
+    <hr>
+  <div class="row">
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
@@ -25,26 +26,26 @@
         </div>
         <h3>Personal info</h3>
         
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" method="post">
           <div class="form-group">
             <label class="col-lg-3 control-label">First name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text">
+              <input class="form-control" type="text" value="{{user.first_name}}">
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Last name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text">
+              <input class="form-control" type="text" value="{{user_prof.last_name}}">
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text">
+              <input class="form-control" type="text" value="{{user.email}}">
             </div>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label class="col-lg-3 control-label">Time Zone:</label>
             <div class="col-lg-8">
               <div class="ui-select">
@@ -60,25 +61,16 @@
                 </select>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="form-group">
-            <label class="col-md-3 control-label">Username:</label>
+            <label class="col-md-3 control-label">Age:</label>
             <div class="col-md-8">
-              <input class="form-control" type="text">
+              <input class="form-control" type="text" value="{{user_prof.age}}">
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Password:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="password">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Confirm password:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="password">
-            </div>
-          </div>
+          <!-- <div class="form-group col-md-3">
+           <p><a href='/home/{{obj.id}}/' class="btn btn-success" role="button">Change Password</a> </p>
+          </div> -->
           <div class="form-group">
             <label class="col-md-3 control-label"></label>
             <div class="col-md-8">
@@ -86,8 +78,34 @@
               <span></span>
               <input class="btn btn-default" value="Cancel" type="reset">
             </div>
+          </div></form>
+            <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green ">Change Password</button>
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-teal"> 
+        <span onclick="document.getElementById('id01').style.display='none'" 
+        class="w3-button w3-display-topright">&times;</span>
+        <h2>Reset Password</h2>
+      </header>
+      <div>
+        <form method="post">
+        <div style="padding-left: 120px;padding-right: 120px; padding-top:40px; padding-bottom: 40px">
+            <div class="card">
+              <h1>Old password</h1>
+              <input type="text" name="fgdfg">
+              <h1>New password</h1>
+              <input type="text" name="fgdfg">
+              <h1>Confirm password</h1>
+              <input type="text" name="fgdfg">
+            
           </div>
-        </form>
+        </div><center><button class="btn-success" type="submit">save</button></center>
+      </form>
+    </div>
+    </div>
+  </div>
+        
       </div>
   </div>
 </div>
