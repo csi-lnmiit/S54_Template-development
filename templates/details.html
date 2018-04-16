@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block content %}
 {% load staticfiles %}
+{% block content %}
 <link href="{% static 'css/details.css' %}" rel="stylesheet">
 <div class="container" style="padding-left: 100px">
 	<div  style="padding-top:20px" >
@@ -174,8 +174,8 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 										{% endif %}
 									{% endfor %}
 							</div>
-							</div>
 						{% endfor %}
+					</div>
 					{% else %}
 					No reviews. Be the first one to post a review.
 					{% endif %}
