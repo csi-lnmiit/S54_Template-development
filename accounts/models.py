@@ -1,11 +1,11 @@
-# -*- coding: utf-8 -*-
+	# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
 
 class UserManager(BaseUserManager):
-	def create_user(self, email, password=None):
+	def create_user(self, email, first_name, password=None):
 		"""
 		Creates and saves a User with the given email and password.
 		"""
@@ -14,31 +14,34 @@ class UserManager(BaseUserManager):
 
 		user = self.model(
 			email=self.normalize_email(email),
+			first_name=first_name,
 		)
 
 		user.set_password(password)
 		user.save(using=self._db)
 		return user
 
-	def create_staffuser(self, email, password):
+	def create_staffuser(self, email, password, first_name):
 		"""
 		Creates and saves a staff user with the given email and password.
 		"""
 		user = self.create_user(
 			email,
 			password=password,
+			first_name=first_name,
 		)
 		user.staff = True
 		user.save(using=self._db)
 		return user
 
-	def create_superuser(self, email, password):
+	def create_superuser(self, email, password, first_name):
 		"""
 		Creates and saves a superuser with the given email and password.
 		"""
 		user = self.create_user(
 			email,
 			password=password,
+			first_name=first_name,
 		)
 		user.staff = True
 		user.admin = True
@@ -47,14 +50,17 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+	first_name= models.CharField(verbose_name = 'first name',max_length = 32)
 	email = models.EmailField(verbose_name='email address',max_length=255,unique=True)
 	active = models.BooleanField(default=True)
 	staff = models.BooleanField(default=False) # a admin user; non super-user
 	admin = models.BooleanField(default=False) # a superuser
+	updated=models.DateTimeField(auto_now=True,auto_now_add=False)
+	timestamp=models.DateTimeField(auto_now=False,auto_now_add=True)
 	# notice the absence of a "Password field", that's built in.
 
 	USERNAME_FIELD = 'email'
-	REQUIRED_FIELDS = [] # Email & Password are required by default.
+	REQUIRED_FIELDS = ['first_name'] # Email & Password are required by default.
 
 	def get_full_name(self):
 		# The user is identified by their email address
@@ -97,11 +103,12 @@ class User(AbstractBaseUser):
 
 class UserProfile(models.Model):
 	user_id = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
-	first_name= models.CharField(verbose_name = 'first name',max_length = 32)
-	last_name= models.CharField(verbose_name = 'last name',max_length = 32)
-	age = models.IntegerField()
+	last_name= models.CharField(default=None,verbose_name = 'last name',max_length = 32,blank=True)
+	age = models.IntegerField(default=None,blank=True,null=True)
+	prof_image = models.ImageField(default=None,blank=True,null=True)
+	activities = models.CharField(max_length=30,default=None,blank=True,null=True)
 	def __unicode__(self):
-		return self.first_name
+		return unicode(self.user_id)
 	def __str__(self):
-		return self.first_name
+		return self.user_id
 	

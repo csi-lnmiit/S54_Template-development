@@ -11,6 +11,8 @@ class Review(models.Model):
 	content = models.TextField(null=True)
 	rating = models.DecimalField(default=0,max_digits=2,decimal_places=1)
 	likes = models.IntegerField(default=0)
+	updated=models.DateTimeField(auto_now=True,auto_now_add=False)
+	timestamp=models.DateTimeField(auto_now=False,auto_now_add=True)
 	def __unicode__(self):
 		return self.content
 	def __str__(self):
@@ -20,6 +22,8 @@ class Comment(models.Model):
 	review_id = models.ForeignKey('review.Review')
 	user_id = models.ForeignKey('accounts.User')
 	comment = models.TextField(null=True)
+	updated=models.DateTimeField(auto_now=True,auto_now_add=False)
+	timestamp=models.DateTimeField(auto_now=False,auto_now_add=True)
 	def __unicode__(self):
 		return self.comment
 	def __str__(self):

@@ -144,9 +144,16 @@ def signup(request):
             userObj = form.cleaned_data
             password1 = userObj['password1']
             password2 = userObj['password2']
-            first_name = userObj['first_name']
-            last_name = userObj['last_name']
             email = userObj['email']
+            first_name = userObj['first_name']
+            last_name = userObj.get('last_name',None)
+            age = userObj.get('age',None)
+            img = userObj.get('profile-image',None)
+            if (age <= 10):
+                context = {
+                    "message" : "Invalid Age",
+                    "form" : form,
+                }
             if (User.objects.filter(email=email).exists()):
                 context = {
                     "message" : "Email already exists",
@@ -161,9 +168,11 @@ def signup(request):
                 }
                 return render(request, 'signup.html', context)
             if not (User.objects.filter(email=email).exists()):
-                User.objects.create_user( email, password1)
+                User.objects.create_user(email,first_name,password1)
                 user = authenticate(email=email, password=password1)
                 login(request, user)
+                temp = UserProfile(user_id=user,last_name=last_name,age=age,prof_image=img)
+                temp.save()
                 return redirect('main')
             else :
                  raise forms.ValidationError('Looks like a username with that email and username already exists')
@@ -173,9 +182,6 @@ def signup(request):
 
 def profile(request):
     return render(request, 'profile.html')
-
-def html_test(request):
-    raise Http404('<h1>Page not found</h1>')
 
 def contact(request):
     return render(request,'contact.html')

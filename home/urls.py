@@ -14,5 +14,4 @@ urlpatterns = [
 	url(r'^logout/$' ,auth_views.logout , name = "logout"),
 	url(r'^(?P<id>\d+)/$' ,views.detail, name = "detail"),
 	url(r'^(?P<id>\d+)/photos/$' ,views.photo, name = "photo"),
-	url(r'^test/$' ,views.html_test,name = "html_test"),
 	]
