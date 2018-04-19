@@ -4,13 +4,11 @@
 <link href="{% static 'css/details.css' %}" rel="stylesheet">
 <div class="container" style="padding-left: 100px">
 	<div  style="padding-top:20px" >
-		<div class="card" style="height:75vh" >
+		<div class="card" style="height:65vh" >
 			<img class="card-img-top det_imgheight" src='{{ object.cover_image.url}}' alt="Card image cap">
 			<div class="card-body">
-				<h5 class="card-title">{{object.title}}</h5>
-				<p class="card-text">{{obj_add.locality}}</p>
-				<p class="card-text">{{obj_equip.name}}</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
+				<h3 class="card-title">{{object.title}}</h3>
+				<p class="card-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj_add.locality}}</p>
 			</div>
 		</div>
 	</div>
@@ -39,10 +37,10 @@
 					
 					<div class="row d">
 						<h3>Equipments present</h3>
+						<p>&nbsp;&nbsp;(Hover to know more)</p>
 						<div class="detail_notsplit">
 						{% for eq in obj_equip %}
-							<h6 data-toggle="tooltip" title="Specs : {{eq.specs}}
-Purpose : {{eq.purpose}}">{{eq.name}}</h6>
+							<h6 data-toggle="tooltip" title="Specs : {{eq.specs}} Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 						{% endfor %}
 						</div>
 					</div>
@@ -100,7 +98,7 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 								<a href='/home/{{object.id}}/photos'>
 									<img class="card-img det_photoht" src='{{ obj_photos.3.image.url}}' alt="card image cap">
 									<div class="card-img-overlay">
-										<b><p class="hover" style="color:black; font-size: 33px;padding-top: 10px">+{{j}}&nbsp;photos</p></b>
+										<p class="hover" style="color:black; font-size: 33px;padding-top: 90px">+{{j}}&nbsp;photos</p>
 									</div>
 								</a>
 							</div>
@@ -175,17 +173,17 @@ Purpose : {{eq.purpose}}">{{eq.name}}</h6>
 										</div>
 										{% endif %}
 									{% endfor %}
-							</div></div></div>
+							</div>
+						</div></div>
 						{% endfor %}
-					</div>
-					{% else %}
-					No reviews. Be the first one to post a review.
-					{% endif %}
-				</div>
+				{% else %}
+				No reviews. Be the first one to post a review.
+				{% endif %}
+			</div>
 			</div>
 		</div>
+	</div>
 </div>
-
 
 <script>
 	{% if error %}
