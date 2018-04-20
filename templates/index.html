@@ -1,47 +1,37 @@
 {% extends "base.html" %}
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-
-  <head>
-  </head>
-
-  <body>
+{% load staticfiles %}
     {% block initial %}
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div id="slideshow" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          <li data-target="#slideshow" data-slide-to="0" class="active"></li>
+          <li data-target="#slideshow" data-slide-to="1"></li>
+          <li data-target="#slideshow" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
-          <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active" style="background-image: url('{% static 'images/1.jpg'%}')">
+          <div class="carousel-item active" style="background-image: url('{% static 'images/3.jpg'%}'); height: 450px;">
             <div class="carousel-caption d-none d-md-block">
-              <h3>First Slide</h3>
-              <p>This is a description for the first slide.</p>
+              <h3>First Gym</h3>
+              <p>Content of the Gym.</p>
             </div>
           </div>
-          <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('{% static 'images/2.jpg'%}')">
+          <div class="carousel-item" style="background-image: url('{% static 'images/2.jpg'%}'); height: 450px;">
             <div class="carousel-caption d-none d-md-block">
-              <h3>Second Slide</h3>
-              <p>This is a description for the second slide.</p>
+              <h3>Second Gym</h3>
+              <p>Content of the Gym.</p>
             </div>
           </div>
-          <!-- Slide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('{% static 'images/3.jpg'%}')">
+          <div class="carousel-item" style="background-image: url('{% static 'images/1.jpg'%}'); height: 450px;">
             <div class="carousel-caption d-none d-md-block">
-              <h3>Third Slide</h3>
-              <p>This is a description for the third slide.</p>
+              <h3>Third Gym</h3>
+              <p>Content of the Gym.</p>
             </div>
           </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#slideshow" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#slideshow" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
@@ -60,6 +50,7 @@
         <section class="py-5">
           <div class="container">
             <h1>List of Gyms</h1>
+            <br>
             {% for obj in object_list %}
             <div class="card">
               <img class="card-img-top" style="height:30vh" src="{{obj.cover_image.url}}" alt="{{obj.title}}">
@@ -74,28 +65,21 @@
             {% endfor %}
           </div>
         
-        <div class="pagination">
-          <span class="step-links">
-        {% if object_list.has_previous %}
-            <!-- <a href="?page=1">&laquo; first</a> -->
-            <a href="?page={{ object_list.previous_page_number }}">previous</a>
-        {% endif %}
+          <div class="pagination">
+            <span class="step-links">
+              {% if object_list.has_previous %}
+                <a href="?page={{ object_list.previous_page_number }}">previous</a>
+              {% endif %}
 
-        <span class="current">
-            Page {{object_list.number }} of {{ object_list.paginator.num_pages }}.
-        </span>
-
-        {% if object_list.has_next %}
-            <a href="?page={{object_list.next_page_number }}">next</a>
-            <a href="?page={{object_list.paginator.num_pages }}">last</a>
-        {% endif %}
-    </span>
-        </div></section>
+              <span class="current">
+                Page {{object_list.number }} of {{ object_list.paginator.num_pages }}.
+              </span>
+              {% if object_list.has_next %}
+                <a href="?page={{object_list.next_page_number }}">next</a>
+                <a href="?page={{object_list.paginator.num_pages }}">last</a>
+              {% endif %}
+            </span>
+          </div>
+        </section>
       </div>   <!-- Ending Main Content -->
-    
     {% endblock content %}
-
-  </body>
-
-</html>
-<!-- bootstrap/js/bootstrap.bundle.min.js -->

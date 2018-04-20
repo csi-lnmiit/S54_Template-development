@@ -5,12 +5,14 @@ from django.http import HttpResponse , HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render,redirect
 from .models import *
-from .forms import SignUpForm
+from .forms import *
 from accounts.models import *
 from review.models import Review,Comment
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 
 def get_user(request):
     if request.user.is_authenticated():
@@ -138,50 +140,86 @@ def photo(request,id=id):
     return render(request,'photos.html',context)
 
 def signup(request):
+    context = {}
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            userObj = form.cleaned_data
-            password1 = userObj['password1']
-            password2 = userObj['password2']
-            email = userObj['email']
-            first_name = userObj['first_name']
-            last_name = userObj.get('last_name',None)
-            age = userObj.get('age',None)
-            img = userObj.get('profile-image',None)
-            if (age <= 10):
-                context = {
-                    "message" : "Invalid Age",
-                    "form" : form,
-                }
-            if (User.objects.filter(email=email).exists()):
-                context = {
-                    "message" : "Email already exists",
-                    "form" : form,
-                }
-                return render(request, 'signup.html', context)
-            if (password1 != password2):
-                context = {
-                    "message" : "Passwords didn't match",
-                    "username" : username,
-                    "form" : form,
-                }
-                return render(request, 'signup.html', context)
-            if not (User.objects.filter(email=email).exists()):
-                User.objects.create_user(email,first_name,password1)
-                user = authenticate(email=email, password=password1)
-                login(request, user)
-                temp = UserProfile(user_id=user,last_name=last_name,age=age,prof_image=img)
-                temp.save()
-                return redirect('main')
-            else :
-                 raise forms.ValidationError('Looks like a username with that email and username already exists')
-    else:
-        form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        email = request.POST['email']
+        first_name = request.POST['first_name']
+        last_name = request.POST.get('last_name',None)
+        age = request.POST.get('age',None)
+        try:
+            test=age+1
+        except TypeError:
+            age=None
+        if (age <= 10 and age!=None):
+            context.update({
+                "message" : "Invalid Age",
+            })
+
+        if (User.objects.filter(email=email).exists()):
+            context.update({
+                "message" : "Email already exists",
+            })
+            return render(request, 'signup.html', context)
+        if (password1 != password2):
+            context.update({
+                "message" : "Passwords didn't match",
+                "username" : username,
+            })
+            return render(request, 'signup.html', context)
+        if not (User.objects.filter(email=email).exists()):
+            User.objects.create_user(email,first_name,password1)
+            user = authenticate(email=email, password=password1)
+            login(request, user)
+            user = request.user
+            temp = UserProfile(user_id=user,last_name=last_name,age=age)
+            temp.save()
+            return redirect('main')
+        else :
+            context.update({
+                "message" : "Some Problem",
+            })
+    return render(request, 'signup.html',context)
 
 def profile(request):
-    return render(request, 'profile.html')
+    if (request.user.is_authenticated):
+        user,user_prof= get_user(request)
+        context = {}
+        if(request.method == 'POST'):
+            user_prof_form = UserProfileForm(request.POST, request.FILES)
+            if user_prof_form.is_valid():
+                user_prof_obj = user_prof_form.cleaned_data
+                first_name  = request.POST['first_name']
+                email = request.POST['email']
+                last_name = user_prof_obj.get('last_name',None)
+                age = user_prof_obj.get('age',None)
+                try:
+                    test=age+1
+                except TypeError:
+                    age=None
+                user.email = email
+                user.first_name = first_name
+                user_prof.last_name = last_name
+                user_prof.age = age
+                user_prof.save()
+                user.save()
+            else :
+                raise forms.ValidationError('There is an error because of user_prof_form')
+        else :
+            user_prof_form = UserProfileForm(
+                    initial={
+                        'last_name': user_prof.last_name,
+                        'age' : user_prof.age,
+                        }
+                )
+        context.update({
+        "user_prof" : user_prof,
+        "title" : user.first_name,
+        "user_prof_form" : user_prof_form
+        })
+        return render(request, 'profile.html',context)
+    else : redirect('login')
 
 def contact(request):
     return render(request,'contact.html')

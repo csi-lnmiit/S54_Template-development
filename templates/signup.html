@@ -1,78 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-  {% load staticfiles %}
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script type="application/x-javascript">
-		addEventListener(
-				"load", function() 
-				{ setTimeout(hideURLbar, 0); },
-				 false
-				);
-		function hideURLbar(){ window.scrollTo(0,1); }
+
+{% load staticfiles %}
+	<head>
+		<link href="{% static 'css/signup.css' %}" rel="stylesheet">
+		<link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+		<meta charset="utf-8">
+		<title>Sign Up | GYMS</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="{% static 'css/ionicons.min.css' %}" rel="stylesheet">
+		<link href="{% static 'fontawesome/css/fontawesome-all.min.css' %}" rel="stylesheet">
+		<link href="{% static 'fontawesome/css/fontawesome.min.css' %}" rel="stylesheet">
+
+	</head>
+	<body onload="Error()">
+		<section class="hero">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-8 mx-auto">
+						<div class="card border-none">
+							<div class="card-body">
+								<div class="text-center text-white">
+									<h1 style="color:#FF582C; border: #000000 !important;">Create Your Account</h1>
+								</div>
+								<p class="text-white lead text-center">
+									Sign up to get started with GYMS
+								</p>
+								<div>
+									<form method="post">
+										{% csrf_token %}
+										<div class = "form-group">
+ 											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span id="first_name" class="input-group-text" style="background-color: black;color:#FF582C; border: #000000 !important;">
+														<i class="far fa-id-badge fa-2x"></i>
+													</span>
+												</div>
+												<input type="text" class="form-control" placeholder="First Name" aria-label="first_name" aria-describedby="first_name" name="first_name" required>
+											</div>
+										</div>
+										<div class = "form-group">
+ 											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span id="last_name" class="input-group-text" style="background-color: black;color:#FF582C; border: #000000 !important;">
+														<i class="far fa-id-badge fa-2x"></i>
+													</span>
+												</div>
+												<input type="text" class="form-control" placeholder="Last Name" aria-label="last_name" aria-describedby="last_name" name="last_name">
+											</div>
+										</div>
+										<div class = "form-group">
+ 											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span id="age" class="input-group-text" style="background-color: black;color:#FF582C; border: #000000 !important;">
+														<i class="far fa-heart fa-2x"></i>
+													</span>
+												</div>
+												<input type="number" class="form-control" placeholder="Age" aria-label="age" aria-describedby="age" name="age">
+											</div>
+										</div>
+										<div class = "form-group">
+ 											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span id="email" class="input-group-text" style="background-color: black;color:#FF582C; border: #000000 !important;">
+														<i class="far fa-envelope fa-2x"></i>
+													</span>
+												</div>
+												<input type="email" class="form-control" placeholder="Email" aria-label="email" aria-describedby="email" name="email" required>
+											</div>
+										</div>
+										<div class = "form-group">
+ 											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span id="password1" class="input-group-text" style="background-color: black;color:#FF582C; border: #000000 !important;">
+														<i class="fa fa-unlock-alt fa-2x"></i>
+													</span>
+												</div>
+												<input type="password" class="form-control" placeholder="Password" aria-label="password1" aria-describedby="password1" name="password1" required>
+											</div>
+										</div>
+										<div class = "form-group">
+ 											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<span id="password2" class="input-group-text" style="background-color: black;color:#FF582C; border: #000000 !important;">
+														<i class="fa fa-unlock-alt fa-2x"></i>
+													</span>
+												</div>
+												<input type="password" class="form-control" placeholder="Confirm Password" aria-label="password2" aria-describedby="password2" required name="password2">
+											</div>
+										</div>
+                                        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                                    </form>
+                                    <div class="clearfix"></div>
+                                    <p class="content-divider center mt-1"><span>OR</span></p>
+                                <p class="text-center text-white">
+                                    Already have an account? <a href="/home/login">Login Now</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+    <script>
+		function Error() {
+			{% if message %}
+			alert("{{message}}");
+			{% endif %}
+		}
 	</script>
-	<link href="{% static 'css/signup.css' %}" rel="stylesheet" type="text/css" media="all">
-	<link href="{% static 'fontawesome/css/fontawesome-all.min.css' %}" rel="stylesheet">
-	<link href="{% static 'fontawesome/css/fontawesome.min.css' %}" rel="stylesheet">
-
-	<title>SignUp | GYMS</title>
-</head>
-
-<body style=' background:url("{% static "images/back.png" %}")'>
-	<div class = "row container main-agileits">
-		<h1 class="sub-head">Sign up</h1>
-		<form method="post" class="sub-main">
-				{{message}}
-			<div class = "row">	
-				{% csrf_token %}
-				<div class = "form-group row">
-					<span id="first_name" class="col-md-3">
-						<i class="fa fa-smile fa-2x"></i>
-						{{form.first_name}}
-					</span>
-				</div>
-				<div class = "form-group row">
-					<span id="last_name" class="col-md-3">
-						<i class="fa fa-smile fa-2x"></i>
-						{{form.last_name}}
-					</span>
-				</div>
-				<div class = "form-group row">
-					<span id="age" class="col-md-3">
-						<i class="fas fa-heart fa-2x"></i>
-						{{form.age}}
-					</span>
-				</div>
-				<div class = "form-group row">
-					<span id="password2" class="col-md-3">
-						<i class="fa fa-envelope fa-2x"></i>
-						{{form.email}}
-					</span>
-				</div>
-				<div class = "form-group row">
-					<span id="password1" class="col-md-3">
-						<i class="fa fa-unlock fa-2x"></i>
-						{{form.password1}}
-					</span>
-				</div>
-				<div class = "form-group row">
-					<span id="password2" class="col-md-3">
-						<i class="fa fa-unlock fa-2x"></i>
-						{{form.password2}}
-					</span>
-				</div>
-				<div class="form-group row">
-					<div class="custom-file">
-						<i class="fas fa-upload fa-2x"></i>
-						<label class="custom-file-label" for="inputGroupFile01">Profile Image&nbsp;&nbsp;&nbsp;</label>
-						<input type="file" class="custom-file-input" id="inputGroupFile01" name="profile-image">
-					</div>
-				</div>
-				<input type="submit" value="signup"></input>
-			</div>
-		</form>
-	</div>
-
-
-</body>
+</html>

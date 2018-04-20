@@ -1,95 +1,93 @@
+
 {% extends "base.html" %}
 
 {% block content %}
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="container">
     <h1>Edit Profile</h1>
-  	<hr>
-	<div class="row">
+    <hr>
+  <div class="row">
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
-          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-          <h6>Upload a different photo...</h6>
-          
-          <input class="form-control" type="file">
+          {% if user_prof.prof_image %}
+          <br>
+          <img src="{{user_prof.prof_image.url}}" class="img-circle" alt="{{user.first_name}}" width="175" height="175" style="border-radius: 50%; box-shadow: -4px -4px 80px black;">
+          {% else %}
+          <i class="material-icons" style="font-size:100px">portrait</i>
+          {% endif %}
         </div>
       </div>
       
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
-        <div class="alert alert-info alert-dismissable">
-          <a class="panel-close close" data-dismiss="alert">×</a> 
-          <i class="fa fa-coffee"></i>
-          This is an <strong>.alert</strong>. Use this to show important messages to the user.
-        </div>
         <h3>Personal info</h3>
-        
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}          
           <div class="form-group">
             <label class="col-lg-3 control-label">First name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text">
+              <input class="form-control" type="text" value="{{user.first_name}}" name="first_name" required>
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Last name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text">
+              <input class="form-control" type="text" value="{{user_prof.last_name}}" name="last_name">
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text">
+              <input class="form-control" type="email" value="{{user.email}}" name="email" required>
             </div>
           </div>
           <div class="form-group">
-            <label class="col-lg-3 control-label">Time Zone:</label>
-            <div class="col-lg-8">
-              <div class="ui-select">
-                <select id="user_time_zone" class="form-control">
-                  <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                  <option value="Alaska">(GMT-09:00) Alaska</option>
-                  <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                  <option value="Arizona">(GMT-07:00) Arizona</option>
-                  <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                  <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                  <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                  <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Username:</label>
+            <label class="col-md-3 control-label">Age:</label>
             <div class="col-md-8">
-              <input class="form-control" type="text">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Password:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="password">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Confirm password:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="password">
+              {% if user_prof.age %}
+              <input class="form-control" type="number" value="{{user_prof.age}}" name="age">
+              {% else %}
+              <input class="form-control" type="number" name="age">
+              {% endif %}
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label"></label>
             <div class="col-md-8">
-              <input class="btn btn-primary" value="Save Changes" type="button">
+              <input class="btn btn-primary" value="Save Changes" type="submit">
               <span></span>
-              <input class="btn btn-default" value="Cancel" type="reset">
+              <input class="btn btn-danger" value="Cancel" type="reset">
+            </div>
+          </div></form>
+          <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green ">Change Password</button>
+          <div id="id01" class="w3-modal">
+            <div class="w3-modal-content w3-card-4">
+              <header class="w3-container w3-teal"> 
+                <span onclick="document.getElementById('id01').style.display='none'" 
+                class="w3-button w3-display-topright">&times;</span>
+                <h2>Reset Password</h2>
+              </header>
+              <div>
+                <form method="post" action="/home/changepass/">
+                  <div style="padding-left: 120px;padding-right: 120px; padding-top:40px; padding-bottom: 40px">
+                    <div class="card">
+                      <h1>Old password</h1>
+                      <input type="text" name="old_pass">
+                      <h1>New password</h1>
+                      <input type="text" name="new_pass1">
+                      <h1>Confirm password</h1>
+                      <input type="text" name="new_pass2">    
+                    </div>
+                  </div>
+                  <center><button class="btn-success" type="submit">save</button></center>
+                </form>
+              </div>
             </div>
           </div>
-        </form>
       </div>
   </div>
-</div>
-<hr>
+</div>  
 {% endblock content %}
